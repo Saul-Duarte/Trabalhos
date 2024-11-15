@@ -18,9 +18,14 @@ class Biblioteca {
     }
 
     public void listarLivros() {
-        for (Livro livro : livros) {
-            System.out.println(livro);
-        }
+    	if (livros.isEmpty()) {
+    		System.out.println("Nenhum livro cadastrado.");
+    	} else {
+    		System.out.println("Livros cadastrados: ");
+    		for (Livro livro : livros) {
+                System.out.println(livro);
+            }
+    	}
     }
 
     public void cadastrarCliente(Cliente cliente) {
@@ -28,9 +33,14 @@ class Biblioteca {
     }
 
     public void listarClientes() {
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente);
-        }
+    	if (clientes.isEmpty()) {
+    		System.out.println("Nenhum cliente cadastrado.");
+    	} else {
+    		System.out.println("Clientes cadastrados: ");
+    		for (Cliente cliente : clientes) {
+                System.out.println(cliente);
+            }
+    	}
     }
 
     public Cliente buscarCliente(String cpf) {
