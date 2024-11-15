@@ -64,8 +64,6 @@ class Biblioteca {
         }else if (livro.getExemplaresDisponiveis() == 0) {
             System.out.println("Livro indisponível.");
             return;
-        }else if (cliente.getMultaPendente() > 0.0) {
-        	System.out.println("Cliente com pendências, não pode pegar mais livros emprestados");
         }else {
         	cliente.emprestarLivro(livro);
         	livro.emprestar();
