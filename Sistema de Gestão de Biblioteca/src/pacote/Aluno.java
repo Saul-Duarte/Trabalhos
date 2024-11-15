@@ -2,8 +2,8 @@ package pacote;
 
 public class Aluno extends Cliente {
 	
-	public Aluno(String nome, String cpf, TipoCLiente tipo) {
-        super(nome, cpf, TipoCLiente.ALUNO);
+	public Aluno(String nome, String cpf, TipoCliente tipo) {
+        super(nome, cpf, TipoCliente.ALUNO);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Aluno extends Cliente {
 
     @Override
     public double getMultaDiaria() { 
-    	return 2.0; 
+    	return 2.0;
     }
 
 }

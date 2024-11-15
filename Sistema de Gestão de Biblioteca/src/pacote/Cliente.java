@@ -1,23 +1,20 @@
 package pacote;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Cliente {
 	
-	enum TipoCLiente {
-		
+	enum TipoCliente {
 		ALUNO , PROFESSOR
-		
 	}
 
 	private String nome;
     private String cpf;
-    private TipoCLiente tipo;
+    private TipoCliente tipo;
     private double multaPendente;
     private ArrayList<Livro> livrosEmprestados;
     
-    public Cliente(String nome, String cpf, TipoCLiente tipo) {
+    public Cliente(String nome, String cpf, TipoCliente tipo) {
         this.nome = nome;
         this.cpf = cpf;
         this.tipo = tipo;
@@ -25,16 +22,13 @@ public abstract class Cliente {
         this.livrosEmprestados = new ArrayList<>();
     }
 
-
-	public TipoCLiente getTipo() {
+	public TipoCliente getTipo() {
 		return tipo;
 	}
 
-
-	public void setTipo(TipoCLiente tipo) {
+	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo;
 	}
-
 
 	public String getNome() {
 		return nome;
@@ -91,8 +85,6 @@ public abstract class Cliente {
     public void quitarMulta() {
         multaPendente = 0.0;
     }
-
-    
     
     @Override
     public String toString() {
