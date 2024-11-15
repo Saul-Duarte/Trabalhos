@@ -2,8 +2,8 @@ package pacote;
 
 public class Aluno extends Cliente {
 	
-	public Aluno(String nome, String cpf) {
-        super(nome, cpf);
+	public Aluno(String nome, String cpf, TipoCLiente tipo) {
+        super(nome, cpf, TipoCLiente.ALUNO);
     }
 
     @Override
