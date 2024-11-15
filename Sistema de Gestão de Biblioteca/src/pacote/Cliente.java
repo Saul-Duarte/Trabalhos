@@ -88,8 +88,7 @@ public abstract class Cliente {
     
     @Override
     public String toString() {
-        return "Cliente: " + nome + ", CPF: " + cpf + ", Livros Emprestados: " + livrosEmprestados.size() +
-        		"Perfil" + tipo;
+        return "Cliente: " + nome + ", CPF: " + cpf + ", Livros Emprestados: " + livrosEmprestados.size() + "Perfil" + tipo;
     }
     
 }
