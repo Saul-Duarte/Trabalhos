@@ -39,13 +39,17 @@ public class BibliotecaApp {
 	            
 	        		System.out.print("Gênero (Romance, Ficcao, Biografia, Tecnico, Terror): ");
 	        		String generoInput = scanner.nextLine().toUpperCase();
-	        		try {
-		            	Livro.Genero genero = Livro.Genero.valueOf(generoInput);
-		            } catch (IllegalArgumentException e) {
-		                System.out.println("Tipo de gênero inválido. Por favor, digite Romance, Ficcao, Biografia, Tecnico ou Terror.");
-		            }
+	        		while (true) {		
+	        			try {
+			            	Livro.Genero genero = Livro.Genero.valueOf(generoInput);
+			            	break;
+	        			} catch (IllegalArgumentException e) {
+			                System.out.print("Tipo de gênero inválido. Por favor, digite: Romance, Ficcao, Biografia, Tecnico ou Terror. ");
+			                System.out.println("Gênero: ");
+			                generoInput = scanner.nextLine().toUpperCase();
+			            } 
+			        }
 	        		Livro.Genero genero = Livro.Genero.valueOf(generoInput);
-	            
 	        		System.out.print("Ano de Publicação: ");
 	        		int ano = scanner.nextInt();
 	            
@@ -66,10 +70,15 @@ public class BibliotecaApp {
 		            
 		            System.out.print("Tipo de Cliente (ALUNO, PROFESSOR): ");
 		            String tipoClienteInput = scanner.nextLine().toUpperCase();
-		            try {
-		            	Cliente.TipoCliente tipoCliente = Cliente.TipoCliente.valueOf(tipoClienteInput);
-		            } catch (IllegalArgumentException e) {
-		                System.out.println("Tipo de cliente inválido. Por favor, digite ALUNO ou PROFESSOR.");
+		            while(true) {
+		            	try {
+			            	Cliente.TipoCliente tipoCliente = Cliente.TipoCliente.valueOf(tipoClienteInput);
+		                    break;
+		            	} catch (IllegalArgumentException e) {
+		            		System.out.println("Tipo de cliente inválido. Por favor, digite ALUNO ou PROFESSOR. ");
+		            		System.out.println("Gênero: ");
+		            		tipoClienteInput = scanner.nextLine().toUpperCase();
+		            	}
 		            }
 		            Cliente.TipoCliente tipoCliente = Cliente.TipoCliente.valueOf(tipoClienteInput);
 		            
