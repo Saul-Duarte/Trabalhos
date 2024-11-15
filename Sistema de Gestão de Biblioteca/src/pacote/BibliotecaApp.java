@@ -102,12 +102,12 @@ public class BibliotecaApp {
 		            String tituloD = scanner.nextLine();
 		            
 		            LocalDate dataAtual = LocalDate.now();
-		            System.out.println("Dia da Devolução (aaaa-mm-dd): ");
-		            String dataDevolucaoInput = scanner.nextLine();
-		            LocalDate dataDevolucao = LocalDate.parse(dataDevolucaoInput);
+		            System.out.println("Coloque a data que você pegou o livro emprestado (aaaa-mm-dd): ");
+		            String dataPegouEmprestadoInput = scanner.nextLine();
+		            LocalDate dataPegouEmprestado = LocalDate.parse(dataPegouEmprestadoInput);
 		
 		            biblioteca.devolverLivro(CPFd, tituloD);
-		            biblioteca.calcularMulta(CPFd, dataDevolucao, dataAtual);
+		            biblioteca.calcularMulta(CPFd, dataPegouEmprestado, dataAtual);
 		            break;
 		            
 		        case 5:

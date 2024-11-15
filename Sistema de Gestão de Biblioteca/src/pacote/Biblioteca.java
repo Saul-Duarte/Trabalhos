@@ -109,10 +109,10 @@ class Biblioteca {
         }
     }
     
-    public void calcularMulta(String cpf, LocalDate dataDevolucao, LocalDate dataAtual) {
+    public void calcularMulta(String cpf, LocalDate dataPegouEmprestado, LocalDate dataAtual) {
     	Cliente cliente = buscarCliente(cpf);
     	if (cliente != null) {
-    		long diasAtraso = ChronoUnit.DAYS.between(dataDevolucao, dataAtual);
+    		long diasAtraso = ChronoUnit.DAYS.between(dataPegouEmprestado, dataAtual);
     		double valorDiario = cliente.getMultaDiaria();
         	double limiteDias = cliente.getPrazoDias();
     		if (diasAtraso > limiteDias) {
