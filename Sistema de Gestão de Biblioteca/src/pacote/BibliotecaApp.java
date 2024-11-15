@@ -44,8 +44,8 @@ public class BibliotecaApp {
 			            	Livro.Genero genero = Livro.Genero.valueOf(generoInput);
 			            	break;
 	        			} catch (IllegalArgumentException e) {
-			                System.out.print("Tipo de gênero inválido. Por favor, digite: Romance, Ficcao, Biografia, Tecnico ou Terror. ");
-			                System.out.println("Gênero: ");
+			                System.out.println("Tipo de gênero inválido. Por favor, digite: Romance, Ficcao, Biografia, Tecnico ou Terror. ");
+			                System.out.print("Gênero: ");
 			                generoInput = scanner.nextLine().toUpperCase();
 			            } 
 			        }
@@ -76,7 +76,7 @@ public class BibliotecaApp {
 		                    break;
 		            	} catch (IllegalArgumentException e) {
 		            		System.out.println("Tipo de cliente inválido. Por favor, digite ALUNO ou PROFESSOR. ");
-		            		System.out.println("Gênero: ");
+		            		System.out.print("Gênero: ");
 		            		tipoClienteInput = scanner.nextLine().toUpperCase();
 		            	}
 		            }
