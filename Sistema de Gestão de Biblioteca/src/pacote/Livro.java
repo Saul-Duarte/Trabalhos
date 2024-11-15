@@ -59,6 +59,14 @@ public class Livro {
 	public void setExemplaresDisponiveis(int exemplaresDisponiveis) {
 		this.exemplaresDisponiveis = exemplaresDisponiveis;
 	}
+	
+	public void emprestar() {
+        exemplaresDisponiveis--;
+    }
+
+    public void devolver() {
+        exemplaresDisponiveis++;
+    }
 
 	@Override
     public String toString() {
