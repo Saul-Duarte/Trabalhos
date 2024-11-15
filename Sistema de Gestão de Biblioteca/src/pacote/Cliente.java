@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Cliente {
 	
 	enum TipoCliente {
-		ALUNO , PROFESSOR
+		ALUNO, PROFESSOR
 	}
 
 	private String nome;
