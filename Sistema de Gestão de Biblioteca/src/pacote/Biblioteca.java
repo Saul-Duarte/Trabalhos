@@ -58,13 +58,13 @@ class Biblioteca {
         if (cliente == null || livro == null) {
             System.out.println("Cliente ou livro não encontrado.");
             return;
-        }else if (!cliente.podeEmprestar()) {
+        } else if (!cliente.podeEmprestar()) {
             System.out.println("Cliente não pode pegar mais livros emprestados.");
             return;
-        }else if (livro.getExemplaresDisponiveis() == 0) {
+        } else if (livro.getExemplaresDisponiveis() == 0) {
             System.out.println("Livro indisponível.");
             return;
-        }else {
+        } else {
         	cliente.emprestarLivro(livro);
         	livro.emprestar();
         	System.out.println("Livro emprestado com sucesso!");
@@ -78,10 +78,10 @@ class Biblioteca {
         if (cliente == null || livro == null) {
             System.out.println("Cliente ou livro não encontrado.");
             return;
-        }else if (!cliente.getLivrosEmprestados().contains(livro)) {
+        } else if (!cliente.getLivrosEmprestados().contains(livro)) {
             System.out.println("Cliente não possui este livro.");
             return;
-        }else {
+        } else {
         	cliente.devolverLivro(livro);
         	livro.devolver();
         	System.out.println("Livro devolvido com sucesso!");
@@ -135,11 +135,9 @@ class Biblioteca {
                 encontrado = true;
             }
         }
-
         if (!encontrado) {
             System.out.println("Nenhum livro encontrado com o critério fornecido.");
         }
     }
-
 
 }
