@@ -136,9 +136,13 @@ public class BibliotecaApp {
 		        	System.out.print("Deseja pesquisar por título ou autor? (Digite 'titulo' ou 'autor'): ");
 		        	String criterio = scanner.nextLine().toLowerCase();
 		        	
-		        	System.out.print("Digite o título ou autor do livro: ");
-		            String termo = scanner.nextLine();
-		
+		        	if (criterio.equals("titulo")) {
+		        		System.out.print("Digite o título do livro: ");
+		        	} else {
+		        		System.out.print("Digite o autor do livro: ");
+		        	}
+		        	String termo = scanner.nextLine();
+		        	
 		            biblioteca.pesquisarLivro(criterio, termo);
 		            break;
 		            
