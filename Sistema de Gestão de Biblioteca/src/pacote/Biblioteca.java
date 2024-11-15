@@ -129,10 +129,10 @@ class Biblioteca {
         boolean encontrado = false;
 
         for (Livro livro : livros) {
-            if (criterio.equals("titulo") && livro.getTitulo().toLowerCase().contains(termo)) {
+            if (criterio.equals("titulo") && livro.getTitulo().contains(termo)) {
                 System.out.println(livro);
                 encontrado = true;
-            } else if (criterio.equals("autor") && livro.getAutor().toLowerCase().contains(termo)) {
+            } else if (criterio.equals("autor") && livro.getAutor().contains(termo)) {
                 System.out.println(livro);
                 encontrado = true;
             }
