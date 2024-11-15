@@ -150,8 +150,8 @@ public class BibliotecaApp {
 		        default:
 		        	System.out.println("Opção inválida. Tente novamente.");
 		        	break;
+            }
         }
-	}
-
-    }      
+    }
+	
 }
