@@ -31,7 +31,7 @@ public class BibliotecaApp {
             
             switch (opcao) {
 	        	case 1:
-	        		System.out.println("Título: ");
+	        		System.out.print("Título: ");
 	        		String titulo = scanner.nextLine();
 	            
 	        		System.out.print("Autor: ");
