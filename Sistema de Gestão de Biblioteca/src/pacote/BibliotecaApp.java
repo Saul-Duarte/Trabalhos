@@ -74,7 +74,7 @@ public class BibliotecaApp {
 		            Cliente.TipoCliente tipoCliente = Cliente.TipoCliente.valueOf(tipoClienteInput);
 		            
 		            Cliente cliente;
-		            if (tipoClienteInput == "ALUNO") {
+		            if (tipoCliente == Cliente.TipoCliente.ALUNO) {
 		                cliente = new Aluno(nome, cpf, tipoCliente);
 		            } else {
 		                cliente = new Professor(nome, cpf, tipoCliente);
