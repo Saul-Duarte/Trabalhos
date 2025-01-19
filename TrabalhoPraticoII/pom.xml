@@ -11,4 +11,13 @@
         <exec.mainClass>com.mycompany.tp2.TP2</exec.mainClass>
     </properties>
     <name>TrabalhoPraticoII</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.11.4</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 </project>
