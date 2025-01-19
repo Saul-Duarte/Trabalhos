@@ -56,7 +56,7 @@ pom.xml                      # Configuração do Maven
 ### **1. Clonar o Repositório**
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone <https://github.com/Saul-Duarte/Trabalhos.git>
 cd <PASTA_DO_REPOSITORIO>
 ```
 
