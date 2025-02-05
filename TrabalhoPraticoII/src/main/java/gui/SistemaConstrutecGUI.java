@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import model.Equipamento;
 import model.Locacao;
 import controller.Controlador;
+import java.awt.CardLayout;
 import java.time.format.DateTimeFormatter;
 import model.Cliente;
 import service.Relatorio;
@@ -87,10 +88,15 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         lblAviso1 = new javax.swing.JLabel();
         lblAviso2 = new javax.swing.JLabel();
         panelRelatorios = new javax.swing.JPanel();
+        panelTabelaRelatorios = new javax.swing.JPanel();
+        panelEquipMaisAlugados = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblEquipMaisAlugados = new javax.swing.JTable();
+        panelClientesMultas = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblClientesMultas = new javax.swing.JTable();
         btnEquipMaisAlugados = new javax.swing.JButton();
         btnClientesMultas = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txaRelatorio = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,7 +194,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addGroup(panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         painelComAbas.addTab("Cadastro de Equipamentos", panelCadEquipamentos);
@@ -251,10 +257,10 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(panelDevoEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelarDevo))
@@ -320,15 +326,19 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestLocacaoLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(btnRegistrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelarReg)
+                .addGap(67, 67, 67))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestLocacaoLayout.createSequentialGroup()
+                .addGap(331, 331, 331)
+                .addComponent(lblAviso2)
+                .addGap(50, 50, 50))
             .addGroup(panelGestLocacaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestLocacaoLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(btnRegistrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelarReg)
-                        .addGap(67, 67, 67))
                     .addGroup(panelGestLocacaoLayout.createSequentialGroup()
                         .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelGestLocacaoLayout.createSequentialGroup()
@@ -336,32 +346,35 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                                     .addComponent(lblDadosCliente)
                                     .addComponent(lblNomeRegistro)
                                     .addComponent(lblCPF)
-                                    .addComponent(lblNomeRegistro2)
-                                    .addComponent(lblMulta)
-                                    .addComponent(lblDataTermino))
+                                    .addComponent(lblNomeRegistro2))
                                 .addGap(18, 18, 18)
                                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelGestLocacaoLayout.createSequentialGroup()
-                                        .addGap(0, 1, Short.MAX_VALUE)
-                                        .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblAviso1))
                                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNomeRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDataTermino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtNomeRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelGestLocacaoLayout.createSequentialGroup()
                                 .addComponent(lblEquip)
                                 .addGap(62, 62, 62)
-                                .addComponent(dropEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblDatas)
-                            .addComponent(lblDataInicio))
-                        .addGap(21, 21, 21))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestLocacaoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblAviso2)
-                .addGap(71, 71, 71))
+                                .addComponent(dropEquip, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelGestLocacaoLayout.createSequentialGroup()
+                        .addComponent(lblMulta)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblAviso1))))
+            .addGroup(panelGestLocacaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGestLocacaoLayout.createSequentialGroup()
+                        .addComponent(lblDataTermino)
+                        .addGap(18, 18, 18)
+                        .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDataTermino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblDatas)
+                    .addComponent(lblDataInicio))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelGestLocacaoLayout.setVerticalGroup(
             panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,7 +385,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(dropEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(33, 33, 33)
                 .addComponent(lblDadosCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -386,7 +399,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeRegistro2)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(lblDatas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -399,7 +412,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addGroup(panelGestLocacaoLayout.createSequentialGroup()
                         .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMulta)
                     .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -407,7 +420,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                         .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAviso2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -417,6 +430,80 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         );
 
         painelComAbas.addTab("Registro de Locações", panelGestLocacao);
+
+        panelTabelaRelatorios.setLayout(new java.awt.CardLayout());
+
+        tblEquipMaisAlugados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Código", "Aluguéis", "Receita Total"
+            }
+        ));
+        jScrollPane2.setViewportView(tblEquipMaisAlugados);
+
+        javax.swing.GroupLayout panelEquipMaisAlugadosLayout = new javax.swing.GroupLayout(panelEquipMaisAlugados);
+        panelEquipMaisAlugados.setLayout(panelEquipMaisAlugadosLayout);
+        panelEquipMaisAlugadosLayout.setHorizontalGroup(
+            panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 465, Short.MAX_VALUE)
+            .addGroup(panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEquipMaisAlugadosLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(7, Short.MAX_VALUE)))
+        );
+        panelEquipMaisAlugadosLayout.setVerticalGroup(
+            panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+            .addGroup(panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEquipMaisAlugadosLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
+        panelTabelaRelatorios.add(panelEquipMaisAlugados, "equipamentos");
+
+        tblClientesMultas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Cliente", "CPF", "Multas"
+            }
+        ));
+        jScrollPane3.setViewportView(tblClientesMultas);
+
+        javax.swing.GroupLayout panelClientesMultasLayout = new javax.swing.GroupLayout(panelClientesMultas);
+        panelClientesMultas.setLayout(panelClientesMultasLayout);
+        panelClientesMultasLayout.setHorizontalGroup(
+            panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 465, Short.MAX_VALUE)
+            .addGroup(panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesMultasLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(7, Short.MAX_VALUE)))
+        );
+        panelClientesMultasLayout.setVerticalGroup(
+            panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+            .addGroup(panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelClientesMultasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        panelTabelaRelatorios.add(panelClientesMultas, "multas");
 
         btnEquipMaisAlugados.setText("Equipamentos Mais Alugados");
         btnEquipMaisAlugados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -434,32 +521,30 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             }
         });
 
-        txaRelatorio.setColumns(20);
-        txaRelatorio.setRows(5);
-        jScrollPane2.setViewportView(txaRelatorio);
-
         javax.swing.GroupLayout panelRelatoriosLayout = new javax.swing.GroupLayout(panelRelatorios);
         panelRelatorios.setLayout(panelRelatoriosLayout);
         panelRelatoriosLayout.setHorizontalGroup(
             panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatoriosLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(btnEquipMaisAlugados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(btnClientesMultas)
+                .addGroup(panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelRelatoriosLayout.createSequentialGroup()
+                        .addComponent(btnEquipMaisAlugados)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnClientesMultas))
+                    .addComponent(panelTabelaRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
-            .addComponent(jScrollPane2)
         );
         panelRelatoriosLayout.setVerticalGroup(
             panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatoriosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEquipMaisAlugados)
-                    .addComponent(btnClientesMultas, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGroup(panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClientesMultas)
+                    .addComponent(btnEquipMaisAlugados))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTabelaRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         painelComAbas.addTab("Relatórios", panelRelatorios);
@@ -499,22 +584,8 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnEquipMaisAlugadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquipMaisAlugadosActionPerformed
-        List<Locacao> locacoes = gestor.getLocacoes(); //Obtenha todas as locações
-
-        //Pega o número de locações de cada equipamento
-        Map<String, Long> equipamentosMaisAlugados = Relatorio.gerarRelatorioMaisAlugados(locacoes);
-
-        //Exibe as informações do relatório na tela
-        StringBuilder relatorio = new StringBuilder();
-        relatorio.append("Relatório: Equipamentos Mais Alugados\n");
-        relatorio.append("=====================================\n");
-        relatorio.append(String.format("%-20s %-10s\n", "Equipamento", "Aluguéis"));
-
-        equipamentosMaisAlugados.forEach((nome, alugueis) -> {
-            relatorio.append(String.format("%-20s %-10d\n", nome, alugueis));
-        });
-
-        txaRelatorio.setText(relatorio.toString());
+        CardLayout card = (CardLayout)panelTabelaRelatorios.getLayout();
+        card.show(panelTabelaRelatorios, "equipamentos");
     }//GEN-LAST:event_btnEquipMaisAlugadosActionPerformed
 
     private void txtQuantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantActionPerformed
@@ -555,25 +626,6 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         txtDataInicio.setText("");
         txtDataTermino.setText("");
         txtMulta.setText("");
-    }
-    
-    //Método para exibir o relatório com a formatação desejada
-    private void exibirRelatorio(String titulo, List<Object[]> dados) {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(titulo).append("\n");
-        builder.append("====================================\n");
-
-        builder.append(String.format("%-20s %-10s %-10s %-15s\n", 
-            "Nome", "Código", "Aluguéis", "Receita Total"));
-        builder.append("------------------------------------\n");
-
-        for (Object[] linha : dados) {
-            builder.append(String.format("%-20s %-10s %-10s %-15s\n", 
-                linha[0], linha[1], linha[2], linha[3]));
-        }
-
-        txaRelatorio.setText(builder.toString());
     }
     
     //Método que inicia o dropdown da tela de locação
@@ -652,25 +704,8 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataTerminoActionPerformed
 
     private void btnClientesMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesMultasActionPerformed
-        List<Cliente> clientes = gestor.getClientes(); // Obtenha todos os clientes
-
-        //Separa os clientes que têm multas
-        List<Cliente> clientesComMultas = Relatorio.gerarRelatorioClientesComMultas(clientes);
-
-        //Mostra as informações na tela
-        StringBuilder relatorio = new StringBuilder();
-        relatorio.append("Relatório: Clientes com Multas Acumuladas\n");
-        relatorio.append("=========================================\n");
-        relatorio.append(String.format("%-20s %-15s %-10s\n", "Cliente", "CPF", "Multas"));
-
-        clientesComMultas.forEach(cliente -> {
-            double totalMultas = cliente.getLocacoes().stream()
-                    .mapToDouble(locacao -> locacao.calcularMulta(LocalDate.now()))
-                    .sum();
-            relatorio.append(String.format("%-20s %-15s R$ %-10.2f\n", cliente.getNome(), cliente.getCpf(), totalMultas));
-        });
-
-        txaRelatorio.setText(relatorio.toString());
+        CardLayout card = (CardLayout)panelTabelaRelatorios.getLayout();
+        card.show(panelTabelaRelatorios, "multas");
     }//GEN-LAST:event_btnClientesMultasActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
@@ -788,6 +823,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> dropEquip;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -810,11 +846,15 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblPreco1;
     private javax.swing.JTabbedPane painelComAbas;
     private javax.swing.JPanel panelCadEquipamentos;
+    private javax.swing.JPanel panelClientesMultas;
     private javax.swing.JPanel panelDevoEquip;
+    private javax.swing.JPanel panelEquipMaisAlugados;
     private javax.swing.JPanel panelGestLocacao;
     private javax.swing.JPanel panelRelatorios;
+    private javax.swing.JPanel panelTabelaRelatorios;
+    private javax.swing.JTable tblClientesMultas;
+    private javax.swing.JTable tblEquipMaisAlugados;
     private javax.swing.JTextArea txaBusca;
-    private javax.swing.JTextArea txaRelatorio;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtDataInicio;
