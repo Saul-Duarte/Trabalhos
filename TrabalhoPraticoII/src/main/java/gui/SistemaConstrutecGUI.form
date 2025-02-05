@@ -54,7 +54,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblDesc" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPreco" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPreco1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblQuant" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -93,7 +93,7 @@
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPreco1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblQuant" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtQuant" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
@@ -159,7 +159,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblPreco1">
+            <Component class="javax.swing.JLabel" name="lblQuant">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Quantidade:"/>
               </Properties>
@@ -198,7 +198,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtBuscar" min="-2" pref="208" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
@@ -211,7 +211,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblBusca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
@@ -281,12 +281,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarDevoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btnBuscar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

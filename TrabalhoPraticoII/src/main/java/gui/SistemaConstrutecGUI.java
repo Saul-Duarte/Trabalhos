@@ -52,7 +52,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         txtPreco = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        lblPreco1 = new javax.swing.JLabel();
+        lblQuant = new javax.swing.JLabel();
         txtQuant = new javax.swing.JTextField();
         panelDevoEquip = new javax.swing.JPanel();
         lblBusca = new javax.swing.JLabel();
@@ -63,7 +63,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         btnConfirmar = new javax.swing.JButton();
         btnCancelarDevo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         panelGestLocacao = new javax.swing.JPanel();
         lblEquip = new javax.swing.JLabel();
         dropEquip = new javax.swing.JComboBox<>();
@@ -135,7 +135,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             }
         });
 
-        lblPreco1.setText("Quantidade:");
+        lblQuant.setText("Quantidade:");
 
         txtQuant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +152,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addGroup(panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDesc)
                     .addComponent(lblPreco)
-                    .addComponent(lblPreco1)
+                    .addComponent(lblQuant)
                     .addComponent(lblNome))
                 .addGap(18, 18, 18)
                 .addGroup(panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -183,7 +183,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPreco1)
+                    .addComponent(lblQuant)
                     .addComponent(txtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addGroup(panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -222,10 +222,10 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -247,7 +247,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnBuscar)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -258,7 +258,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addGroup(panelDevoEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBusca)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -735,9 +735,9 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                                       "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     
     
@@ -792,6 +792,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarDevo;
     private javax.swing.JButton btnCancelarReg;
@@ -801,7 +802,6 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> dropEquip;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -823,7 +823,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeRegistro;
     private javax.swing.JLabel lblNomeRegistro2;
     private javax.swing.JLabel lblPreco;
-    private javax.swing.JLabel lblPreco1;
+    private javax.swing.JLabel lblQuant;
     private javax.swing.JTabbedPane painelComAbas;
     private javax.swing.JPanel panelCadEquipamentos;
     private javax.swing.JPanel panelDevoEquip;
