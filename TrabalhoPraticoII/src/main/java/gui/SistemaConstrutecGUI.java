@@ -63,6 +63,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         btnConfirmar = new javax.swing.JButton();
         btnCancelarDevo = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         panelGestLocacao = new javax.swing.JPanel();
         lblEquip = new javax.swing.JLabel();
         dropEquip = new javax.swing.JComboBox<>();
@@ -221,6 +222,13 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDevoEquipLayout = new javax.swing.GroupLayout(panelDevoEquip);
         panelDevoEquip.setLayout(panelDevoEquipLayout);
         panelDevoEquipLayout.setHorizontalGroup(
@@ -230,14 +238,16 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             .addGroup(panelDevoEquipLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(btnConfirmar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addComponent(btnCancelarDevo)
                 .addGap(76, 76, 76))
             .addGroup(panelDevoEquipLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -247,14 +257,15 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDevoEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBusca)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(panelDevoEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelarDevo))
@@ -724,6 +735,10 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                                       "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     
     
     /**
@@ -786,6 +801,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> dropEquip;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
