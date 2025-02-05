@@ -609,22 +609,54 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarRegActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        try {
+            try {
             String nomeCliente = txtNomeRegistro.getText().trim();
             String cpf = txtCPF.getText().trim();
             String telefone = txtTelefone.getText().trim();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText().trim(), formatter);
             LocalDate dataFim = LocalDate.parse(txtDataTermino.getText().trim(), formatter);
+            LocalDate dataAtual = LocalDate.now();
             double multaPercentual = txtMulta.getText().isEmpty() ? 10.0 : Double.parseDouble(txtMulta.getText());
-            
-            // Valide os campos obrigatórios
+
+            // Validação de campos obrigatórios
             if (nomeCliente.isEmpty() || cpf.isEmpty() || telefone.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            //Seleciona o equipamento selecionado no dropdown
+             if (dataInicio.isAfter(dataFim)) {
+                JOptionPane.showMessageDialog(this, "A data de início não pode ser posterior à data de término.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (dataInicio.isAfter(dataAtual)|| dataInicio.isBefore(dataAtual)) {
+                JOptionPane.showMessageDialog(this, "Data de inicio pode ser apenas a data atual.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (dataFim.isBefore(dataAtual)){
+                JOptionPane.showMessageDialog(this, "A data fim não pode ser antes da data atual.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+            // Validação: Nome deve conter apenas letras e espaços
+            if (!nomeCliente.matches("[A-Za-zÀ-ÖØ-öø-ÿ ]+")) {
+                JOptionPane.showMessageDialog(this, "Nome inválido! Digite apenas letras.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validação: CPF deve conter apenas números e ter 11 dígitos
+            if (!cpf.matches("\\d{11}")) {
+                JOptionPane.showMessageDialog(this, "CPF inválido! Deve conter exatamente 11 números.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validação: Telefone deve conter apenas números e ter entre 10 e 11 dígitos
+            if (!telefone.matches("\\d{10,11}")) {
+                JOptionPane.showMessageDialog(this, "Telefone inválido! Deve conter apenas números (DDD + número).", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            //Seleciona o equipamento no dropdown
             int selectedIndex = dropEquip.getSelectedIndex();
             if (selectedIndex <= 0) {
                 JOptionPane.showMessageDialog(this, "Selecione um equipamento para a locação.", "Erro", JOptionPane.ERROR_MESSAGE);
