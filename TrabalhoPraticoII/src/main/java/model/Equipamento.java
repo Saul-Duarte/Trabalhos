@@ -1,77 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author sauls
- */
+import controller.ConexaoMySQL;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+
 public class Equipamento {
-    //Atributos da Classe Equipamento
-    private static int codigoGenerator = 1;
-    private int codigo;
-    private String nome;
-    private String descricao;
-    private double valorDiario;
-    private boolean status;
-    private int quantidade;
-    
-    //Construtor da Classe Equipamento
-    public Equipamento(String nome, String descricao, double valorDiario, int quantidade) {
-        this.codigo = codigoGenerator++; //Gerador de código de cada equipamento
-        this.nome = nome;
-        this.descricao = descricao;
-        this.valorDiario = valorDiario;
-        this.quantidade = quantidade;
-        this.status = quantidade > 0; //Se quantidade < 0, o equipamento não poderá ser alugado
+   public void inserirEquipamento(String nome, String descricao, double valor_diario) {
+       String sql = "INSERT INTO equipamento (nome, descricao, valor_diario) VALUES (?, ?, ?)";
+       try (Connection conn = ConexaoMySQL.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            stmt.setString(2, descricao);
+            stmt.setDouble(3, valor_diario);
+            stmt.executeUpdate();
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
+   
+   public void atualizarEquipamento(String nome, int id, String descricao, double valor_diario, boolean status) {
+        String sql = "UPDATE usuarios SET nome=?, descricao=?, valor_diario=?, status=? WHERE id=?";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            stmt.setString(2, descricao);
+            stmt.setDouble(3, valor_diario);
+            stmt.setBoolean(4, status);
+            stmt.setInt(5, id);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public int getCodigo() {
-        return codigo;
+    public void excluirEquipamento(int id) {
+        String sql = "DELETE FROM equipamento WHERE id=?";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getNome() {
-        return nome;
+    public void listarEquipamentos(DefaultTableModel model) {
+        model.setRowCount(0);
+        String sql = "SELECT * FROM equipamento";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString("nome"), rs.getInt("id"), rs.getString("descricao"), rs.getDouble("valor_diario"), rs.getBoolean("status")});
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public double getValorDiario() {
-        return valorDiario;
-    }
-
-    public void setValorDiario(double valorDiario) {
-        this.valorDiario = valorDiario;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-    
-    //Método para alterar a quantidade de um equipamento
-    public void ajustarQuantidade(int ajuste) {
-        this.quantidade += ajuste;
-        this.status = quantidade > 0;
-    }
-    
 }
