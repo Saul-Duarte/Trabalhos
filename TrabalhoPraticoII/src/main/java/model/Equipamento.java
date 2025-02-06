@@ -5,13 +5,14 @@ import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 public class Equipamento {
-   public void inserirEquipamento(String nome, String descricao, double valor_diario) {
+   public void inserirEquipamento(String nome, String descricao, double valor_diario, boolean status) {
        String sql = "INSERT INTO equipamento (nome, descricao, valor_diario) VALUES (?, ?, ?)";
        try (Connection conn = ConexaoMySQL.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nome);
             stmt.setString(2, descricao);
             stmt.setDouble(3, valor_diario);
+            stmt.setBoolean(4, status);
             stmt.executeUpdate();
        } catch (Exception e) {
            e.printStackTrace();
