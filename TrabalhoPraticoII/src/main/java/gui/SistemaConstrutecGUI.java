@@ -98,8 +98,49 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         tblClientesMultas = new javax.swing.JTable();
         btnEquipMaisAlugados = new javax.swing.JButton();
         btnClientesMultas = new javax.swing.JButton();
+        panelEditarDados = new javax.swing.JPanel();
+        panelTabelaEditarDados = new javax.swing.JPanel();
+        panelEditarEquip = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblEditarEquip = new javax.swing.JTable();
+        btnAlterarEquip = new javax.swing.JButton();
+        btnExcluirEquip = new javax.swing.JButton();
+        btnCancelarEditEquip = new javax.swing.JButton();
+        lblNomeEdit = new javax.swing.JLabel();
+        lblDescricaoEdit = new javax.swing.JLabel();
+        lblPrecoEdit = new javax.swing.JLabel();
+        lblQuantEdit = new javax.swing.JLabel();
+        txtNomeEdit = new javax.swing.JTextField();
+        txtDescricaoEdit = new javax.swing.JTextField();
+        txtPrecoEdit = new javax.swing.JTextField();
+        txtQuantEdit = new javax.swing.JTextField();
+        panelEditarClientes = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblEditarClientes = new javax.swing.JTable();
+        btnAlterarClientes = new javax.swing.JButton();
+        btnExcluirClientes = new javax.swing.JButton();
+        btnCancelarEditClientes = new javax.swing.JButton();
+        lblNomeEditCliente = new javax.swing.JLabel();
+        lblCPFEdit = new javax.swing.JLabel();
+        lblTelefoneEdit = new javax.swing.JLabel();
+        txtNomeEditClientes = new javax.swing.JTextField();
+        txtCPFEdit = new javax.swing.JTextField();
+        txtTelefoneEdit = new javax.swing.JTextField();
+        panelEditarLocacoes = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblEditarLocacao = new javax.swing.JTable();
+        btnAlterarLocacao = new javax.swing.JButton();
+        btnExcluirLocacao = new javax.swing.JButton();
+        btnCancelarEditLocacao = new javax.swing.JButton();
+        lblDataTerminoEdit = new javax.swing.JLabel();
+        txtDataTerminoEdit = new javax.swing.JTextField();
+        btnEditarEquip = new javax.swing.JButton();
+        btnEditarClientes = new javax.swing.JButton();
+        btnEditarLocacacoes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        painelComAbas.setPreferredSize(new java.awt.Dimension(539, 539));
 
         lblNome.setText("Nome:");
 
@@ -164,13 +205,13 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addGroup(panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelCadEquipamentosLayout.createSequentialGroup()
                         .addComponent(btnSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtPreco)
                     .addComponent(txtDesc)
                     .addComponent(txtNome)
                     .addComponent(txtQuant, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCadEquipamentosLayout.setVerticalGroup(
             panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +236,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addGroup(panelCadEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         painelComAbas.addTab("Cadastro de Equipamentos", panelCadEquipamentos);
@@ -244,7 +285,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             .addGroup(panelDevoEquipLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(btnConfirmar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelarDevo)
                 .addGap(76, 76, 76))
             .addGroup(panelDevoEquipLayout.createSequentialGroup()
@@ -271,7 +312,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelDevoEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelarDevo))
@@ -338,13 +379,13 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestLocacaoLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(24, 24, 24)
                 .addComponent(btnRegistrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelarReg)
-                .addGap(67, 67, 67))
+                .addGap(73, 73, 73))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestLocacaoLayout.createSequentialGroup()
-                .addGap(331, 331, 331)
+                .addGap(331, 356, Short.MAX_VALUE)
                 .addComponent(lblAviso2)
                 .addGap(50, 50, 50))
             .addGroup(panelGestLocacaoLayout.createSequentialGroup()
@@ -423,7 +464,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addGroup(panelGestLocacaoLayout.createSequentialGroup()
                         .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMulta)
                     .addGroup(panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -461,16 +502,16 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         panelEquipMaisAlugados.setLayout(panelEquipMaisAlugadosLayout);
         panelEquipMaisAlugadosLayout.setHorizontalGroup(
             panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEquipMaisAlugadosLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(7, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelEquipMaisAlugadosLayout.setVerticalGroup(
             panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(panelEquipMaisAlugadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEquipMaisAlugadosLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -497,16 +538,16 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         panelClientesMultas.setLayout(panelClientesMultasLayout);
         panelClientesMultasLayout.setHorizontalGroup(
             panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesMultasLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(7, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelClientesMultasLayout.setVerticalGroup(
             panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(panelClientesMultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelClientesMultasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -560,15 +601,307 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
         painelComAbas.addTab("Relatórios", panelRelatorios);
 
+        panelTabelaEditarDados.setLayout(new java.awt.CardLayout());
+
+        tblEditarEquip.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Descrição", "Preço Diário", "Quantidade"
+            }
+        ));
+        jScrollPane4.setViewportView(tblEditarEquip);
+
+        btnAlterarEquip.setText("Alterar");
+
+        btnExcluirEquip.setText("Excluir");
+
+        btnCancelarEditEquip.setText("Cancelar");
+
+        lblNomeEdit.setText("Nome:");
+
+        lblDescricaoEdit.setText("Descrição:");
+
+        lblPrecoEdit.setText("Preço Diário:");
+
+        lblQuantEdit.setText("Quantidade:");
+
+        txtNomeEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeEditActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelEditarEquipLayout = new javax.swing.GroupLayout(panelEditarEquip);
+        panelEditarEquip.setLayout(panelEditarEquipLayout);
+        panelEditarEquipLayout.setHorizontalGroup(
+            panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarEquipLayout.createSequentialGroup()
+                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEditarEquipLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAlterarEquip)
+                        .addGap(120, 120, 120)
+                        .addComponent(btnExcluirEquip)
+                        .addGap(126, 126, 126)
+                        .addComponent(btnCancelarEditEquip))
+                    .addGroup(panelEditarEquipLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelEditarEquipLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNomeEdit)
+                                    .addComponent(lblDescricaoEdit)
+                                    .addComponent(lblPrecoEdit)
+                                    .addComponent(lblQuantEdit))
+                                .addGap(31, 31, 31)
+                                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNomeEdit)
+                                    .addComponent(txtDescricaoEdit)
+                                    .addComponent(txtPrecoEdit)
+                                    .addComponent(txtQuantEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelEditarEquipLayout.setVerticalGroup(
+            panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarEquipLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomeEdit)
+                    .addComponent(txtNomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescricaoEdit)
+                    .addComponent(txtDescricaoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecoEdit)
+                    .addComponent(txtPrecoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQuantEdit)
+                    .addComponent(txtQuantEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterarEquip)
+                    .addComponent(btnExcluirEquip)
+                    .addComponent(btnCancelarEditEquip)))
+        );
+
+        panelTabelaEditarDados.add(panelEditarEquip, "card2");
+
+        tblEditarClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "CPF", "Telefone"
+            }
+        ));
+        jScrollPane5.setViewportView(tblEditarClientes);
+
+        btnAlterarClientes.setText("Alterar");
+
+        btnExcluirClientes.setText("Excluir");
+
+        btnCancelarEditClientes.setText("Cancelar");
+
+        lblNomeEditCliente.setText("Nome:");
+
+        lblCPFEdit.setText("CPF:");
+
+        lblTelefoneEdit.setText("Telefone:");
+
+        txtNomeEditClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeEditClientesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelEditarClientesLayout = new javax.swing.GroupLayout(panelEditarClientes);
+        panelEditarClientes.setLayout(panelEditarClientesLayout);
+        panelEditarClientesLayout.setHorizontalGroup(
+            panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarClientesLayout.createSequentialGroup()
+                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEditarClientesLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAlterarClientes)
+                        .addGap(120, 120, 120)
+                        .addComponent(btnExcluirClientes)
+                        .addGap(126, 126, 126)
+                        .addComponent(btnCancelarEditClientes))
+                    .addGroup(panelEditarClientesLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelEditarClientesLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNomeEditCliente)
+                                    .addComponent(lblCPFEdit)
+                                    .addComponent(lblTelefoneEdit))
+                                .addGap(48, 48, 48)
+                                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNomeEditClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(txtCPFEdit)
+                                    .addComponent(txtTelefoneEdit))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelEditarClientesLayout.setVerticalGroup(
+            panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarClientesLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomeEditCliente)
+                    .addComponent(txtNomeEditClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCPFEdit)
+                    .addComponent(txtCPFEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelefoneEdit)
+                    .addComponent(txtTelefoneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterarClientes)
+                    .addComponent(btnExcluirClientes)
+                    .addComponent(btnCancelarEditClientes)))
+        );
+
+        panelTabelaEditarDados.add(panelEditarClientes, "card3");
+
+        tblEditarLocacao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Descrição", "Preço Diário", "Quantidade"
+            }
+        ));
+        jScrollPane6.setViewportView(tblEditarLocacao);
+
+        btnAlterarLocacao.setText("Alterar");
+
+        btnExcluirLocacao.setText("Excluir");
+
+        btnCancelarEditLocacao.setText("Cancelar");
+
+        lblDataTerminoEdit.setText("Data Término:");
+
+        txtDataTerminoEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataTerminoEditActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelEditarLocacoesLayout = new javax.swing.GroupLayout(panelEditarLocacoes);
+        panelEditarLocacoes.setLayout(panelEditarLocacoesLayout);
+        panelEditarLocacoesLayout.setHorizontalGroup(
+            panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
+                .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAlterarLocacao)
+                        .addGap(120, 120, 120)
+                        .addComponent(btnExcluirLocacao)
+                        .addGap(126, 126, 126)
+                        .addComponent(btnCancelarEditLocacao))
+                    .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(lblDataTerminoEdit)
+                                .addGap(31, 31, 31)
+                                .addComponent(txtDataTerminoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        panelEditarLocacoesLayout.setVerticalGroup(
+            panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDataTerminoEdit)
+                    .addComponent(txtDataTerminoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterarLocacao)
+                    .addComponent(btnExcluirLocacao)
+                    .addComponent(btnCancelarEditLocacao)))
+        );
+
+        panelTabelaEditarDados.add(panelEditarLocacoes, "card4");
+
+        btnEditarEquip.setText("Editar Equipamentos");
+
+        btnEditarClientes.setText("Editar Clientes");
+
+        btnEditarLocacacoes.setText("Editar Locações");
+
+        javax.swing.GroupLayout panelEditarDadosLayout = new javax.swing.GroupLayout(panelEditarDados);
+        panelEditarDados.setLayout(panelEditarDadosLayout);
+        panelEditarDadosLayout.setHorizontalGroup(
+            panelEditarDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarDadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelEditarDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEditarDadosLayout.createSequentialGroup()
+                        .addComponent(panelTabelaEditarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelEditarDadosLayout.createSequentialGroup()
+                        .addComponent(btnEditarEquip)
+                        .addGap(69, 69, 69)
+                        .addComponent(btnEditarClientes)
+                        .addGap(90, 90, 90)
+                        .addComponent(btnEditarLocacacoes)
+                        .addContainerGap(18, Short.MAX_VALUE))))
+        );
+        panelEditarDadosLayout.setVerticalGroup(
+            panelEditarDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarDadosLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(panelEditarDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditarEquip)
+                    .addComponent(btnEditarClientes)
+                    .addComponent(btnEditarLocacacoes))
+                .addGap(27, 27, 27)
+                .addComponent(panelTabelaEditarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        painelComAbas.addTab("Editar Dados", panelEditarDados);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelComAbas)
+            .addComponent(painelComAbas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelComAbas)
+            .addComponent(painelComAbas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -792,6 +1125,18 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void txtNomeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeEditActionPerformed
+
+    private void txtNomeEditClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeEditClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeEditClientesActionPerformed
+
+    private void txtDataTerminoEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataTerminoEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataTerminoEditActionPerformed
+
     
     
     /**
@@ -845,19 +1190,34 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterarClientes;
+    private javax.swing.JButton btnAlterarEquip;
+    private javax.swing.JButton btnAlterarLocacao;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarDevo;
+    private javax.swing.JButton btnCancelarEditClientes;
+    private javax.swing.JButton btnCancelarEditEquip;
+    private javax.swing.JButton btnCancelarEditLocacao;
     private javax.swing.JButton btnCancelarReg;
     private javax.swing.JButton btnClientesMultas;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnEditarClientes;
+    private javax.swing.JButton btnEditarEquip;
+    private javax.swing.JButton btnEditarLocacacoes;
     private javax.swing.JButton btnEquipMaisAlugados;
+    private javax.swing.JButton btnExcluirClientes;
+    private javax.swing.JButton btnExcluirEquip;
+    private javax.swing.JButton btnExcluirLocacao;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> dropEquip;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -866,39 +1226,63 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblAviso2;
     private javax.swing.JLabel lblBusca;
     private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblCPFEdit;
     private javax.swing.JLabel lblDadosCliente;
     private javax.swing.JLabel lblDataInicio;
     private javax.swing.JLabel lblDataTermino;
+    private javax.swing.JLabel lblDataTerminoEdit;
     private javax.swing.JLabel lblDatas;
     private javax.swing.JLabel lblDesc;
+    private javax.swing.JLabel lblDescricaoEdit;
     private javax.swing.JLabel lblEquip;
     private javax.swing.JLabel lblMulta;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNomeEdit;
+    private javax.swing.JLabel lblNomeEditCliente;
     private javax.swing.JLabel lblNomeRegistro;
     private javax.swing.JLabel lblNomeRegistro2;
     private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblPrecoEdit;
     private javax.swing.JLabel lblQuant;
+    private javax.swing.JLabel lblQuantEdit;
+    private javax.swing.JLabel lblTelefoneEdit;
     private javax.swing.JTabbedPane painelComAbas;
     private javax.swing.JPanel panelCadEquipamentos;
     private javax.swing.JPanel panelClientesMultas;
     private javax.swing.JPanel panelDevoEquip;
+    private javax.swing.JPanel panelEditarClientes;
+    private javax.swing.JPanel panelEditarDados;
+    private javax.swing.JPanel panelEditarEquip;
+    private javax.swing.JPanel panelEditarLocacoes;
     private javax.swing.JPanel panelEquipMaisAlugados;
     private javax.swing.JPanel panelGestLocacao;
     private javax.swing.JPanel panelRelatorios;
+    private javax.swing.JPanel panelTabelaEditarDados;
     private javax.swing.JPanel panelTabelaRelatorios;
     private javax.swing.JTable tblClientesMultas;
+    private javax.swing.JTable tblEditarClientes;
+    private javax.swing.JTable tblEditarEquip;
+    private javax.swing.JTable tblEditarLocacao;
     private javax.swing.JTable tblEquipMaisAlugados;
     private javax.swing.JTextArea txaBusca;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCPF;
+    private javax.swing.JTextField txtCPFEdit;
     private javax.swing.JTextField txtDataInicio;
     private javax.swing.JTextField txtDataTermino;
+    private javax.swing.JTextField txtDataTerminoEdit;
     private javax.swing.JTextField txtDesc;
+    private javax.swing.JTextField txtDescricaoEdit;
     private javax.swing.JTextField txtMulta;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNomeEdit;
+    private javax.swing.JTextField txtNomeEditClientes;
     private javax.swing.JTextField txtNomeRegistro;
     private javax.swing.JTextField txtPreco;
+    private javax.swing.JTextField txtPrecoEdit;
     private javax.swing.JTextField txtQuant;
+    private javax.swing.JTextField txtQuantEdit;
     private javax.swing.JTextField txtTelefone;
+    private javax.swing.JTextField txtTelefoneEdit;
     // End of variables declaration//GEN-END:variables
 }
