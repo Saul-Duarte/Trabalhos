@@ -4,79 +4,74 @@
  */
 package model;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
+import controller.ConexaoMySQL;
+import java.sql.Connection;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author sauls
  */
 public class Locacao {
-    //Atributos da Classe Locacao
-    private static int codigoGenerator = 1;
-    private int codigo;
-    private Cliente cliente;
-    private List<Equipamento> equipamentos;
-    private LocalDate dataInicio;
-    private LocalDate dataTermino;
-    private double multaDiaria;
-    private double valorTotal;
-    
-    //Construtor da Classe Locação
-    public Locacao(Cliente cliente, List<Equipamento> equipamentos, LocalDate dataInicio, LocalDate dataTermino, double multaDiaria){
-        this.codigo = codigoGenerator++;
-        this.cliente = cliente;
-        this.equipamentos = equipamentos;
-        this.dataInicio = dataInicio;
-        this.dataTermino = dataTermino;
-        this.multaDiaria = multaDiaria;
-        equipamentos.forEach(e -> e.ajustarQuantidade(-1));
-        this.valorTotal = calcularValorTotal();
-    }
-    
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public List<Equipamento> getEquipamentos() {
-        return equipamentos;
-    }
-
-    public LocalDate getDataInicio() {
-        return dataInicio;
-    }
-
-    public LocalDate getDataTermino() {
-        return dataTermino;
-    }
-    
-    //Método que calcula os dias de aluguel
-    public double calcularDiasAluguel(){
-        return ChronoUnit.DAYS.between(dataInicio, dataTermino);
-    }
-    
-    //Método que calcula o valor do aluguel
-    public double calcularValorTotal(){
-        return equipamentos.stream().mapToDouble(Equipamento::getValorDiario).sum() * calcularDiasAluguel();
-    }
-    
-    //Método que calcula o valor da multa se houver atraso
-    public double calcularMulta(LocalDate dataDevolucao){
-    long diasAtraso = ChronoUnit.DAYS.between(dataTermino, dataDevolucao);
-        if (diasAtraso > 0){
-            return equipamentos.stream()
-                    .mapToDouble(e -> e.getValorDiario() * (multaDiaria / 100) * diasAtraso)
-                    .sum();
+public void inserirLocacao(Date dataInicio, Date dataTermino, double multa) {
+        String sql = "INSERT INTO locacoes (data_inicio, data_termino, multa, equipamento_id, cliente_id) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDate(1, dataInicio);
+            stmt.setDate(2, dataTermino);
+            stmt.setDouble(3, multa);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return 0;
     }
 
-    public double getValorTotal() {
-        return valorTotal;
+    public void atualizarLocacao(int id, Date dataInicio, Date dataTermino, double multa, int equipamentoId, int clienteId) {
+        String sql = "UPDATE locacoes SET data_inicio=?, data_termino=?, multa=?, equipamento_id=?, cliente_id=? WHERE id=?";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDate(1, dataInicio);
+            stmt.setDate(2, dataTermino);
+            stmt.setDouble(3, multa);
+            stmt.setInt(4, equipamentoId);
+            stmt.setInt(5, clienteId);
+            stmt.setInt(6, id);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void excluirLocacao(int id) {
+        String sql = "DELETE FROM locacoes WHERE id=?";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarLocacoes(DefaultTableModel model) {
+        model.setRowCount(0);
+        String sql = "SELECT * FROM locacoes";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("id"),
+                    rs.getDate("data_inicio"),
+                    rs.getDate("data_termino"),
+                    rs.getBigDecimal("multa"),
+                    rs.getInt("equipamento_id"),
+                    rs.getInt("cliente_id")
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
