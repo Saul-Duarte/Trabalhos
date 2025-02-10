@@ -56,4 +56,20 @@ public class Cliente {
             e.printStackTrace();
         }
     }
+    
+    public int obterIdCliente(String cpf) {
+        String sql = "SELECT id FROM cliente WHERE cpf=?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, cpf);  // Usando o CPF como parâmetro
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;  // Retorna 0 se não encontrar o cliente
+    }
 }

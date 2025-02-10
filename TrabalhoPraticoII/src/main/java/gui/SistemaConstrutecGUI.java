@@ -8,6 +8,7 @@ import model.Equipamento;
 import model.Locacao;
 import java.awt.CardLayout;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -651,32 +652,30 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         panelEditarEquipLayout.setHorizontalGroup(
             panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEditarEquipLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEditarEquipLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnAlterarEquip)
-                        .addGap(120, 120, 120)
-                        .addComponent(btnExcluirEquip)
-                        .addGap(126, 126, 126)
-                        .addComponent(btnCancelarEditEquip))
-                    .addGroup(panelEditarEquipLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(12, 12, 12)
                         .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelEditarEquipLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNomeEdit)
-                                    .addComponent(lblDescricaoEdit)
-                                    .addComponent(lblPrecoEdit)
-                                    .addComponent(lblQuantEdit))
-                                .addGap(31, 31, 31)
-                                .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNomeEdit)
-                                    .addComponent(txtDescricaoEdit)
-                                    .addComponent(txtPrecoEdit)
-                                    .addComponent(txtQuantEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblNomeEdit)
+                            .addComponent(lblDescricaoEdit)
+                            .addComponent(lblPrecoEdit)
+                            .addComponent(lblQuantEdit))
+                        .addGap(31, 31, 31)
+                        .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNomeEdit)
+                            .addComponent(txtDescricaoEdit)
+                            .addComponent(txtPrecoEdit)
+                            .addComponent(txtQuantEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
+                    .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(panelEditarEquipLayout.createSequentialGroup()
+                            .addComponent(btnAlterarEquip)
+                            .addGap(126, 126, 126)
+                            .addComponent(btnExcluirEquip)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancelarEditEquip))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         panelEditarEquipLayout.setVerticalGroup(
             panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,11 +698,12 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(txtQuantEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(28, 28, 28)
                 .addGroup(panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterarEquip)
                     .addComponent(btnExcluirEquip)
-                    .addComponent(btnCancelarEditEquip)))
+                    .addComponent(btnCancelarEditEquip))
+                .addGap(20, 20, 20))
         );
 
         panelTabelaEditarDados.add(panelEditarEquip, "editarEquip");
@@ -759,30 +759,28 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         panelEditarClientesLayout.setHorizontalGroup(
             panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEditarClientesLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEditarClientesLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnAlterarClientes)
-                        .addGap(120, 120, 120)
-                        .addComponent(btnExcluirClientes)
-                        .addGap(126, 126, 126)
-                        .addComponent(btnCancelarEditClientes))
-                    .addGroup(panelEditarClientesLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(12, 12, 12)
                         .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelEditarClientesLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNomeEditCliente)
-                                    .addComponent(lblCPFEdit)
-                                    .addComponent(lblTelefoneEdit))
-                                .addGap(48, 48, 48)
-                                .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNomeEditClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(txtCPFEdit)
-                                    .addComponent(txtTelefoneEdit))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblNomeEditCliente)
+                            .addComponent(lblCPFEdit)
+                            .addComponent(lblTelefoneEdit))
+                        .addGap(48, 48, 48)
+                        .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNomeEditClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(txtCPFEdit)
+                            .addComponent(txtTelefoneEdit)))
+                    .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEditarClientesLayout.createSequentialGroup()
+                            .addComponent(btnAlterarClientes)
+                            .addGap(128, 128, 128)
+                            .addComponent(btnExcluirClientes)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancelarEditClientes))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         panelEditarClientesLayout.setVerticalGroup(
             panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,11 +799,12 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(txtTelefoneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
                 .addGroup(panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterarClientes)
                     .addComponent(btnExcluirClientes)
-                    .addComponent(btnCancelarEditClientes)))
+                    .addComponent(btnCancelarEditClientes))
+                .addGap(30, 30, 30))
         );
 
         panelTabelaEditarDados.add(panelEditarClientes, "editarClientes");
@@ -857,24 +856,22 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         panelEditarLocacoesLayout.setHorizontalGroup(
             panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnAlterarLocacao)
-                        .addGap(120, 120, 120)
-                        .addComponent(btnExcluirLocacao)
-                        .addGap(126, 126, 126)
-                        .addComponent(btnCancelarEditLocacao))
-                    .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelEditarLocacoesLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(lblDataTerminoEdit)
-                                .addGap(31, 31, 31)
-                                .addComponent(txtDataTerminoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(lblDataTerminoEdit)
+                        .addGap(31, 31, 31)
+                        .addComponent(txtDataTerminoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEditarLocacoesLayout.createSequentialGroup()
+                            .addComponent(btnAlterarLocacao)
+                            .addGap(125, 125, 125)
+                            .addComponent(btnExcluirLocacao)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancelarEditLocacao))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         panelEditarLocacoesLayout.setVerticalGroup(
             panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -885,11 +882,12 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(txtDataTerminoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(19, 19, 19)
                 .addGroup(panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterarLocacao)
                     .addComponent(btnExcluirLocacao)
-                    .addComponent(btnCancelarEditLocacao)))
+                    .addComponent(btnCancelarEditLocacao))
+                .addGap(29, 29, 29))
         );
 
         panelTabelaEditarDados.add(panelEditarLocacoes, "editarLocacoes");
@@ -1031,7 +1029,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             }
 
             // SQL para inserir os dados
-            String sql = "INSERT INTO equipamentos (nome, descricao, preco_diario, quantidade) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO equipamento (nome, descricao, valor_diario, quantidade) VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                 stmt.setString(1, nome);
@@ -1116,16 +1114,27 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 return;
             }
 
+            Equipamento equip = new Equipamento();
+            String nome = dropEquip.getName();
+            int equipamentoId = equip.obterIdEquipamento(nome);
+            
+            if (!equip.obterStatusEquipamento(equipamentoId)) {
+                JOptionPane.showMessageDialog(this, "O equipamento selecionado já está alugado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             Cliente cliente = new Cliente();
             cliente.inserirCliente(nomeCliente, cpf, telefone);
+            int clienteId = cliente.obterIdCliente(cpf);
 
             Locacao locacao = new Locacao();
-            locacao.inserirLocacao(dataInicio, dataFim, multaPercentual);
+            locacao.inserirLocacao(dataInicio, dataFim, multaPercentual, equipamentoId, clienteId);
 
             JOptionPane.showMessageDialog(this, "Locação registrada com sucesso!");
 
-            //Limpa os campos
-            limparCamposRegistro();
+            equip.atualizarStatusEquipamento(equipamentoId, false);
+            equip.decrementarQuantidade(equipamentoId);
+            limparCamposRegistro(); //Limpa os campos
             inicializarDropdownEquipamentos(); //Atualiza o dropdown após a locação
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao registrar locação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -1168,58 +1177,62 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesMultasActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        String cpfOuCodigo = txtBuscar.getText().trim();
+        String textoBusca = txaBusca.getText();
+        Locacao locacao = new Locacao();
+        StringBuilder resultado = new StringBuilder();
+        Equipamento equipamento = new Equipamento();
 
-        if (cpfOuCodigo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, insira um CPF ou Código de Locação válido.", 
-                                          "Erro", JOptionPane.ERROR_MESSAGE);
+        int locacaoId = locacao.extrairLocacaoIdDoTexto(textoBusca);
+
+        if (locacaoId == -1) {
+            JOptionPane.showMessageDialog(this, "ID da locação inválido ou não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        //Buscar locações pelo CPF
-        List<Locacao> locacoes = gestor.buscarLocacaoPorCpf(cpfOuCodigo);
+        LocalDate data = LocalDate.now();
+        Date dataDevolucao = Date.valueOf(data);
 
-        if (locacoes.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhuma locação encontrada para o CPF fornecido.", 
-                                          "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
+        double multa = locacao.calcularMulta(locacaoId, dataDevolucao);
+        double ValorAluguel = locacao.calcularValorTotal(locacaoId);
+        double ValorTotal = multa + ValorAluguel;
+
+        resultado.append("Multa: ").append(multa).append("\n");
+        resultado.append("Valor do Aluguel: ").append(ValorAluguel).append("\n");
+        resultado.append("Valor total a pagar: ").append(ValorTotal).append("\n");
+        resultado.append("Devolucão feita com sucesso! ").append("\n");
+        JOptionPane.showMessageDialog(this, resultado.toString(), "Resumo da Devolução", JOptionPane.INFORMATION_MESSAGE);
+
+        try {
+            // Exclui a locação e atualiza o status do equipamento
+            locacao.excluirLocacao(locacaoId);
+            equipamento.atualizarStatusEquipamento(locacaoId, true);
+
+            // Exibe o resultado e a mensagem de sucesso
+            resultado.append("Devolução feita com sucesso!").append("\n");
+            JOptionPane.showMessageDialog(this, resultado.toString(), "Resumo da Devolução", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            // Exibe mensagem de erro em caso de falha
+            JOptionPane.showMessageDialog(this, "Erro ao confirmar devolução: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-
-        //Suponha que a interface tenha uma forma de selecionar uma locação específica (por exemplo, um dropdown)
-        Locacao locacaoSelecionada = locacoes.get(0); //Para simplificação, pegue a primeira locação encontrada
-
-        //Registra a devolução
-        LocalDate dataDevolucao = LocalDate.now();
-        gestor.registrarDevolucao(locacaoSelecionada, dataDevolucao);
-
-        //Atualiza a tela com os detalhes da devolução
-        StringBuilder detalhesDevolucao = new StringBuilder();
-        detalhesDevolucao.append("Equipamento(s) Devolvido(s):\n");
-
-        for (Equipamento equipamento : locacaoSelecionada.getEquipamentos()) {
-            detalhesDevolucao.append(String.format("- %s (Código: %s)\n", equipamento.getNome(), equipamento.getCodigo()));
-        }
-
-        //Detalhes imprimidos na tela
-        detalhesDevolucao.append("\nResumo da Devolução:\n");
-        detalhesDevolucao.append(String.format("Data de Término: %s\n", locacaoSelecionada.getDataTermino()));
-        detalhesDevolucao.append(String.format("Data de Devolução: %s\n", dataDevolucao));
-        detalhesDevolucao.append(String.format("Multa Aplicada: R$ %.2f\n", locacaoSelecionada.calcularMulta(dataDevolucao)));
-        detalhesDevolucao.append(String.format("Valor do Aluguel: R$ %.2f\n", locacaoSelecionada.getValorTotal()));
-        detalhesDevolucao.append(String.format("Valor Total (Aluguel + Multa): R$ %.2f\n", 
-                                               locacaoSelecionada.getValorTotal() + locacaoSelecionada.calcularMulta(dataDevolucao)));
-
-        txaBusca.setText(detalhesDevolucao.toString());
-        
-        inicializarDropdownEquipamentos();
-
-        //Confirmação visual
-        JOptionPane.showMessageDialog(this, "Devolução confirmada com sucesso!", 
-                                      "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+        String cpfOuCodigo = txtBuscar.getText().trim();
+
+        if (cpfOuCodigo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira um CPF ou ID.", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            Long.valueOf(cpfOuCodigo); // Tenta converter a entrada para um número
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira apenas números.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Locacao locacao = new Locacao();
+
+        locacao.buscarLocacaoPorCPF(cpfOuCodigo, txaBusca);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtNomeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeEditActionPerformed
@@ -1404,23 +1417,26 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         txtQuantEdit.setText("");
     }
 
-    //Método que inicia o dropdown da tela de locação
     private void inicializarDropdownEquipamentos() {
-        //Esvazia o dropdown
+        // Esvazia o dropdown
         dropEquip.removeAllItems();
 
-        //Coloca esta opção no dropdown
+        // Coloca esta opção no dropdown
         dropEquip.addItem("Selecione uma opção");
+        
+        // Obtém a lista de nomes dos equipamentos
+        Equipamento equipamento = new Equipamento();
+        List<String> nomesEquipamentos = equipamento.listarNomesEquipamentos();
 
-        //Quando um equipamento é registrado ele é automaticamente adicionado às opções do dropdown
-        List<Equipamento> equipamentosDisponiveis = gestor.getEquipamentosDisponiveis();
-        for (Equipamento equipamento : equipamentosDisponiveis) {
-            dropEquip.addItem(equipamento.getNome());
+        // Adiciona os nomes dos equipamentos no dropdown
+        for (String nome : nomesEquipamentos) {
+            dropEquip.addItem(nome);
         }
 
-        //Garante que "Selecione uma opção" seja a primeira escolha do dropdown
+        // Garante que "Selecione uma opção" seja a primeira escolha do dropdown
         dropEquip.setSelectedIndex(0);
     }
+
 
     private void listarEquipamentos() {
         Equipamento equip = new Equipamento();

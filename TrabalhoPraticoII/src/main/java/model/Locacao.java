@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import controller.ConexaoMySQL;
@@ -9,14 +5,11 @@ import java.sql.Connection;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author sauls
- */
 public class Locacao {
-    public void inserirLocacao(LocalDate dataInicio, LocalDate dataTermino, double multa) {
+    public void inserirLocacao(LocalDate dataInicio, LocalDate dataTermino, double multa, int equipamentoId, int clienteId) {
         java.sql.Date dataComeco = java.sql.Date.valueOf(dataInicio);
         java.sql.Date dataFim = java.sql.Date.valueOf(dataTermino);
         String sql = "INSERT INTO locacoes (data_inicio, data_termino, multa, equipamento_id, cliente_id) VALUES (?, ?, ?, ?, ?)";
@@ -24,12 +17,13 @@ public class Locacao {
             stmt.setDate(1, dataComeco);
             stmt.setDate(2, dataFim);
             stmt.setDouble(3, multa);
+            stmt.setInt(4, equipamentoId);
+            stmt.setInt(5, clienteId);
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     public void atualizarLocacao(int id, Date dataTermino) {
         String sql = "UPDATE locacoes SET data_termino=? WHERE id=?";
@@ -180,6 +174,59 @@ public class Locacao {
         }
         return multaTotal;
     }
+    public void buscarLocacaoPorCPF(String cpfOuCodigo, JTextArea textArea) {
+    StringBuilder resultado = new StringBuilder(); // Para construir a string formatada
+    String sql = "SELECT l.id, l.data_inicio, l.data_termino, l.multa, l.equipamento_id, l.cliente_id " +
+                 "FROM locacao l " +
+                 "JOIN cliente c ON l.cliente_id = c.id " +
+                 "WHERE c.cpf = ?";
+    
+    try (Connection conn = ConexaoMySQL.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+           stmt.setString(1, cpfOuCodigo);
+           try (ResultSet rs = stmt.executeQuery()) {
+               boolean encontrouRegistros = false; // Flag para verificar se há registros
 
+               while (rs.next()) {
+                   encontrouRegistros = true; // Marca que pelo menos um registro foi encontrado
+                   // Formata os dados e adiciona ao StringBuilder
+                   resultado.append("ID: ").append(rs.getInt("id")).append("\n");
+                   resultado.append("Data Início: ").append(rs.getDate("data_inicio")).append("\n");
+                   resultado.append("Data Término: ").append(rs.getDate("data_termino")).append("\n");
+                   resultado.append("Multa: ").append(rs.getDouble("multa")).append("\n");
+                   resultado.append("Equipamento ID: ").append(rs.getInt("equipamento_id")).append("\n");
+                   resultado.append("Cliente ID: ").append(rs.getInt("cliente_id")).append("\n");
+                   resultado.append("----------------------------\n"); // Separador entre registros
+               }
+               
+               // Verifica se nenhum registro foi encontrado
+               if (!encontrouRegistros) {
+                   resultado.append("Nenhuma locação encontrada para o CPF ou código informado.\n");
+               }
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+           resultado.append("Erro ao buscar locações: ").append(e.getMessage());
+       }
+        
+       // Define o texto no JTextArea
+       textArea.setText(resultado.toString());
+       }
+        
+    public int extrairLocacaoIdDoTexto(String texto) {
+        // Procura pela linha que contém o ID da locação
+        String[] linhas = texto.split("\n");
+        for (String linha : linhas) {
+            if (linha.startsWith("ID: ")) {
+                try {
+                    // Extrai o número após "ID: "
+                    return Integer.parseInt(linha.substring(4).trim());
+                } catch (NumberFormatException e) {
+                    return -1; // Retorna -1 se não conseguir extrair o ID
+                }
+            }
+        }
+        return -1; // Retorna -1 se não encontrar a linha com o ID
+    }
 }
