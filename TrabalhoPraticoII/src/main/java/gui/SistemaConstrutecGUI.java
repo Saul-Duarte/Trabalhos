@@ -1,26 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
-import controller.Gestor;
+import controller.ConexaoMySQL;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import model.Equipamento;
 import model.Locacao;
-import controller.Controlador;
 import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import model.Cliente;
 import service.Relatorio;
 
-/**
- *
- * @author sauls
- */
 public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
     /**
@@ -30,9 +28,6 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         initComponents();
         inicializarDropdownEquipamentos();
     }
-    
-    private Gestor gestor = new Gestor();
-    private Controlador controlador = new Controlador();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -605,22 +600,37 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
         tblEditarEquip.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Descrição", "Preço Diário", "Quantidade"
+                "ID", "Nome", "Descrição", "Preço Diário", "Quantidade"
             }
         ));
         jScrollPane4.setViewportView(tblEditarEquip);
 
         btnAlterarEquip.setText("Alterar");
+        btnAlterarEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarEquipActionPerformed(evt);
+            }
+        });
 
         btnExcluirEquip.setText("Excluir");
+        btnExcluirEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirEquipActionPerformed(evt);
+            }
+        });
 
         btnCancelarEditEquip.setText("Cancelar");
+        btnCancelarEditEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEditEquipActionPerformed(evt);
+            }
+        });
 
         lblNomeEdit.setText("Nome:");
 
@@ -696,26 +706,41 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(btnCancelarEditEquip)))
         );
 
-        panelTabelaEditarDados.add(panelEditarEquip, "card2");
+        panelTabelaEditarDados.add(panelEditarEquip, "editarEquip");
 
         tblEditarClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nome", "CPF", "Telefone"
+                "ID", "Nome", "CPF", "Telefone"
             }
         ));
         jScrollPane5.setViewportView(tblEditarClientes);
 
         btnAlterarClientes.setText("Alterar");
+        btnAlterarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarClientesActionPerformed(evt);
+            }
+        });
 
         btnExcluirClientes.setText("Excluir");
+        btnExcluirClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirClientesActionPerformed(evt);
+            }
+        });
 
         btnCancelarEditClientes.setText("Cancelar");
+        btnCancelarEditClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEditClientesActionPerformed(evt);
+            }
+        });
 
         lblNomeEditCliente.setText("Nome:");
 
@@ -783,26 +808,41 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(btnCancelarEditClientes)))
         );
 
-        panelTabelaEditarDados.add(panelEditarClientes, "card3");
+        panelTabelaEditarDados.add(panelEditarClientes, "editarClientes");
 
         tblEditarLocacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Descrição", "Preço Diário", "Quantidade"
+                "ID", "Cliente", "Equipamento", "Data de Início", "Data de Término", "Multa"
             }
         ));
         jScrollPane6.setViewportView(tblEditarLocacao);
 
         btnAlterarLocacao.setText("Alterar");
+        btnAlterarLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarLocacaoActionPerformed(evt);
+            }
+        });
 
         btnExcluirLocacao.setText("Excluir");
+        btnExcluirLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirLocacaoActionPerformed(evt);
+            }
+        });
 
         btnCancelarEditLocacao.setText("Cancelar");
+        btnCancelarEditLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEditLocacaoActionPerformed(evt);
+            }
+        });
 
         lblDataTerminoEdit.setText("Data Término:");
 
@@ -852,13 +892,28 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     .addComponent(btnCancelarEditLocacao)))
         );
 
-        panelTabelaEditarDados.add(panelEditarLocacoes, "card4");
+        panelTabelaEditarDados.add(panelEditarLocacoes, "editarLocacoes");
 
         btnEditarEquip.setText("Editar Equipamentos");
+        btnEditarEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarEquipActionPerformed(evt);
+            }
+        });
 
         btnEditarClientes.setText("Editar Clientes");
+        btnEditarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarClientesActionPerformed(evt);
+            }
+        });
 
         btnEditarLocacacoes.setText("Editar Locações");
+        btnEditarLocacacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarLocacacoesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEditarDadosLayout = new javax.swing.GroupLayout(panelEditarDados);
         panelEditarDados.setLayout(panelEditarDadosLayout);
@@ -928,7 +983,32 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnEquipMaisAlugadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquipMaisAlugadosActionPerformed
-        CardLayout card = (CardLayout)panelTabelaRelatorios.getLayout();
+
+        // Instancia a classe Relatorio
+        Relatorio relatorio = new Relatorio();
+
+        // Obtém a lista de equipamentos mais alugados
+        List<String> equipamentosMaisAlugados = relatorio.obterEquipamentosMaisAlugados();
+
+        // Obtém o modelo da tabela na GUI
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblEquipMaisAlugados.getModel();
+
+        // Limpa os dados atuais da tabela
+        modeloTabela.setRowCount(0);
+
+        // Adiciona os dados obtidos à tabela
+        for (String equipamento : equipamentosMaisAlugados) {
+            // Divide os dados no formato "Equipamento - Alugado X vezes"
+            String[] dados = equipamento.split(" - Alugado ");
+            if (dados.length == 2) {
+                String nomeEquipamento = dados[0];
+                String quantidadeAlugado = dados[1].replace(" vezes", ""); // Remove o texto extra
+
+                // Adiciona uma linha na tabela
+                modeloTabela.addRow(new Object[]{nomeEquipamento, quantidadeAlugado});
+            }
+        }
+        CardLayout card = (CardLayout) panelTabelaRelatorios.getLayout();
         card.show(panelTabelaRelatorios, "equipamentos");
     }//GEN-LAST:event_btnEquipMaisAlugadosActionPerformed
 
@@ -937,60 +1017,45 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        //O Botão registra os equipamentos se as informações estiverem corretas
-        try {
+        // O botão registra os equipamentos no banco de dados se as informações estiverem corretas
+        try (Connection conexao = ConexaoMySQL.conectar()) {
             String nome = txtNome.getText();
             String descricao = txtDesc.getText();
             double valorDiario = Double.parseDouble(txtPreco.getText());
             int quantidade = Integer.parseInt(txtQuant.getText());
 
-            gestor.cadastrarEquipamento(nome, descricao, valorDiario, quantidade);
+            // Verificar se os campos estão preenchidos
+            if (nome.isEmpty() || descricao.isEmpty() || txtPreco.getText().isEmpty() || txtQuant.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            JOptionPane.showMessageDialog(this, "Equipamento cadastrado com sucesso!");
-            inicializarDropdownEquipamentos();
-            limparCamposCadastro();
+            // SQL para inserir os dados
+            String sql = "INSERT INTO equipamentos (nome, descricao, preco_diario, quantidade) VALUES (?, ?, ?, ?)";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setString(1, nome);
+                stmt.setString(2, descricao);
+                stmt.setDouble(3, valorDiario);
+                stmt.setInt(4, quantidade);
+
+                // Executa a inserção
+                int linhasAfetadas = stmt.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    JOptionPane.showMessageDialog(this, "Equipamento cadastrado com sucesso!");
+                    inicializarDropdownEquipamentos();
+                    limparCamposCadastro();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Falha ao cadastrar equipamento.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Preencha os campos corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-    //Método de limpar os campos da tela de cadastro
-    private void limparCamposCadastro() {
-        txtNome.setText("");
-        txtDesc.setText("");
-        txtPreco.setText("");
-        txtQuant.setText("");
-    }
-    
-    //Método de limpar os campos da tela de registro
-    private void limparCamposRegistro() {
-        txtNomeRegistro.setText("");
-        txtCPF.setText("");
-        txtTelefone.setText("");
-        txtDataInicio.setText("");
-        txtDataTermino.setText("");
-        txtMulta.setText("");
-    }
-    
-    //Método que inicia o dropdown da tela de locação
-    private void inicializarDropdownEquipamentos() {
-        //Esvazia o dropdown
-        dropEquip.removeAllItems();
-
-        //Coloca esta opção no dropdown
-        dropEquip.addItem("Selecione uma opção");
-
-        //Quando um equipamento é registrado ele é automaticamente adicionado às opções do dropdown
-        List<Equipamento> equipamentosDisponiveis = gestor.getEquipamentosDisponiveis();
-        for (Equipamento equipamento : equipamentosDisponiveis) {
-            dropEquip.addItem(equipamento.getNome());
-        }
-
-        //Garante que "Selecione uma opção" seja a primeira escolha do dropdown
-        dropEquip.setSelectedIndex(0);
-    }
-
-
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limparCamposCadastro();
@@ -1005,7 +1070,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarRegActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-            try {
+        try {
             String nomeCliente = txtNomeRegistro.getText().trim();
             String cpf = txtCPF.getText().trim();
             String telefone = txtTelefone.getText().trim();
@@ -1045,10 +1110,17 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 return;
             }
 
-            Equipamento equipamentoSelecionado = gestor.getEquipamentosDisponiveis().get(selectedIndex - 1);
+            // Validação: A data de início não pode ser posterior à data de término
+            if (dataInicio.isAfter(dataFim)) {
+                JOptionPane.showMessageDialog(this, "A data de início não pode ser depois da data de término!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            //Registra a locação
-            gestor.registrarLocacao(nomeCliente, cpf, telefone, List.of(equipamentoSelecionado), dataInicio, dataFim, multaPercentual);
+            Cliente cliente = new Cliente();
+            cliente.inserirCliente(nomeCliente, cpf, telefone);
+
+            Locacao locacao = new Locacao();
+            locacao.inserirLocacao(dataInicio, dataFim, multaPercentual);
 
             JOptionPane.showMessageDialog(this, "Locação registrada com sucesso!");
 
@@ -1066,7 +1138,32 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataTerminoActionPerformed
 
     private void btnClientesMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesMultasActionPerformed
-        CardLayout card = (CardLayout)panelTabelaRelatorios.getLayout();
+        // Instancia a classe Relatorio
+        Relatorio relatorio = new Relatorio();
+
+        // Obtém a lista de clientes com multas acumuladas
+        List<String> clientesComMultas = relatorio.obterClientesComMultasAcumuladas();
+
+        // Obtém o modelo da tabela na GUI
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblClientesMultas.getModel();
+
+        // Limpa os dados atuais da tabela
+        modeloTabela.setRowCount(0);
+
+        // Adiciona os dados obtidos à tabela
+        for (String cliente : clientesComMultas) {
+            // Divide os dados no formato "Cliente - Multas: R$X"
+            String[] dados = cliente.split(" - Multas: R\\$");
+            if (dados.length == 2) {
+                String nomeCliente = dados[0];
+                String valorMultas = dados[1]; // Valor já está formatado como string
+
+                // Adiciona uma linha na tabela
+                modeloTabela.addRow(new Object[]{nomeCliente, valorMultas});
+            }
+        }
+
+        CardLayout card = (CardLayout) panelTabelaRelatorios.getLayout();
         card.show(panelTabelaRelatorios, "multas");
     }//GEN-LAST:event_btnClientesMultasActionPerformed
 
@@ -1137,6 +1234,93 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataTerminoEditActionPerformed
 
+    private void btnEditarEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEquipActionPerformed
+        CardLayout card = (CardLayout) panelTabelaEditarDados.getLayout();
+        card.show(panelTabelaEditarDados, "editarEquip");
+        listarEquipamentos();
+    }//GEN-LAST:event_btnEditarEquipActionPerformed
+
+    private void btnEditarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClientesActionPerformed
+        CardLayout card = (CardLayout) panelTabelaEditarDados.getLayout();
+        card.show(panelTabelaEditarDados, "editarClientes");
+        listarClientes();
+    }//GEN-LAST:event_btnEditarClientesActionPerformed
+
+    private void btnEditarLocacacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarLocacacoesActionPerformed
+        CardLayout card = (CardLayout) panelTabelaEditarDados.getLayout();
+        card.show(panelTabelaEditarDados, "editarLocacoes");
+        listarLocacoes();
+    }//GEN-LAST:event_btnEditarLocacacoesActionPerformed
+
+    private void btnExcluirLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLocacaoActionPerformed
+        Locacao locacao = new Locacao();
+        int row = tblEditarLocacao.getSelectedRow();
+        int id = (int) tblEditarLocacao.getValueAt(row, 0);
+        locacao.excluirLocacao(id);
+        listarLocacoes();
+    }//GEN-LAST:event_btnExcluirLocacaoActionPerformed
+
+    private void btnAlterarLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarLocacaoActionPerformed
+        Locacao locacao = new Locacao();
+        int row = tblEditarLocacao.getSelectedRow();
+        int id = (int) tblEditarLocacao.getValueAt(row, 0);
+        try {
+            locacao.atualizarLocacao(id, new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(txtDataTerminoEdit.getText()).getTime()));
+        } catch (ParseException ex) {
+            Logger.getLogger(SistemaConstrutecGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtDataTerminoEdit.setText("");
+        listarLocacoes();
+    }//GEN-LAST:event_btnAlterarLocacaoActionPerformed
+
+    private void btnCancelarEditLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditLocacaoActionPerformed
+        txtDataTerminoEdit.setText("");
+    }//GEN-LAST:event_btnCancelarEditLocacaoActionPerformed
+
+    private void btnAlterarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClientesActionPerformed
+        Cliente cliente = new Cliente();
+        int row = tblEditarClientes.getSelectedRow();
+        int id = (int) tblEditarClientes.getValueAt(row, 0);
+        cliente.atualizarCliente(id, txtNomeEditClientes.getText(), txtCPFEdit.getText(), txtTelefoneEdit.getText());
+        limparCamposClientesEdit();
+        listarClientes();
+    }//GEN-LAST:event_btnAlterarClientesActionPerformed
+
+    private void btnExcluirClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClientesActionPerformed
+        Cliente cliente = new Cliente();
+        int row = tblEditarClientes.getSelectedRow();
+        int id = (int) tblEditarClientes.getValueAt(row, 0);
+        cliente.excluirCliente(id);
+        listarClientes();
+    }//GEN-LAST:event_btnExcluirClientesActionPerformed
+
+    private void btnCancelarEditClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditClientesActionPerformed
+        limparCamposClientesEdit();
+    }//GEN-LAST:event_btnCancelarEditClientesActionPerformed
+
+    private void btnAlterarEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEquipActionPerformed
+        Equipamento equip = new Equipamento();
+        double preco = (txtPrecoEdit.getText().isEmpty()) ? 0.0 : Double.parseDouble(txtPrecoEdit.getText());
+        int quantidade = (txtQuantEdit.getText().isEmpty()) ? 0 : Integer.parseInt(txtQuantEdit.getText());
+        int row = tblEditarEquip.getSelectedRow();
+        int id = (int) tblEditarEquip.getValueAt(row, 0);
+        equip.atualizarEquipamento(id, txtNomeEdit.getText(), txtDescricaoEdit.getText(), preco, quantidade);
+        limparCamposEquipamentosEdit();
+        listarEquipamentos();
+    }//GEN-LAST:event_btnAlterarEquipActionPerformed
+
+    private void btnExcluirEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirEquipActionPerformed
+        Equipamento equip = new Equipamento();
+        int row = tblEditarEquip.getSelectedRow();
+        int id = (int) tblEditarEquip.getValueAt(row, 0);
+        equip.excluirEquipamento(id);
+        listarEquipamentos();
+    }//GEN-LAST:event_btnExcluirEquipActionPerformed
+
+    private void btnCancelarEditEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditEquipActionPerformed
+        limparCamposEquipamentosEdit();
+    }//GEN-LAST:event_btnCancelarEditEquipActionPerformed
+
     
     
     /**
@@ -1187,6 +1371,73 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 new SistemaConstrutecGUI().setVisible(true);
             }
         });
+    }
+    
+    //Método de limpar os campos da tela de cadastro
+    private void limparCamposCadastro() {
+        txtNome.setText("");
+        txtDesc.setText("");
+        txtPreco.setText("");
+        txtQuant.setText("");
+    }
+
+    //Método de limpar os campos da tela de registro
+    private void limparCamposRegistro() {
+        txtNomeRegistro.setText("");
+        txtCPF.setText("");
+        txtTelefone.setText("");
+        txtDataInicio.setText("");
+        txtDataTermino.setText("");
+        txtMulta.setText("");
+    }
+    
+    private void limparCamposClientesEdit() {
+        txtNomeEditClientes.setText("");
+        txtCPFEdit.setText("");
+        txtTelefoneEdit.setText("");
+    }
+    
+    private void limparCamposEquipamentosEdit() {
+        txtNomeEdit.setText("");
+        txtDescricaoEdit.setText("");
+        txtPrecoEdit.setText("");
+        txtQuantEdit.setText("");
+    }
+
+    //Método que inicia o dropdown da tela de locação
+    private void inicializarDropdownEquipamentos() {
+        //Esvazia o dropdown
+        dropEquip.removeAllItems();
+
+        //Coloca esta opção no dropdown
+        dropEquip.addItem("Selecione uma opção");
+
+        //Quando um equipamento é registrado ele é automaticamente adicionado às opções do dropdown
+        List<Equipamento> equipamentosDisponiveis = gestor.getEquipamentosDisponiveis();
+        for (Equipamento equipamento : equipamentosDisponiveis) {
+            dropEquip.addItem(equipamento.getNome());
+        }
+
+        //Garante que "Selecione uma opção" seja a primeira escolha do dropdown
+        dropEquip.setSelectedIndex(0);
+    }
+
+    private void listarEquipamentos() {
+        Equipamento equip = new Equipamento();
+        DefaultTableModel model = (DefaultTableModel) tblEditarEquip.getModel();
+        equip.listarEquipamentos(model);
+    }
+    
+    private void listarClientes() {
+        Cliente cliente = new Cliente();
+        DefaultTableModel model = (DefaultTableModel) tblEditarClientes.getModel();
+        cliente.listarCliente(model);
+    }
+    
+    private void listarLocacoes() {
+        Locacao locacao = new Locacao();
+        DefaultTableModel model = (DefaultTableModel) tblEditarLocacao.getModel();
+        locacao.listarLocacoes(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

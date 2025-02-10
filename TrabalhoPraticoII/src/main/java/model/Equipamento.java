@@ -20,16 +20,15 @@ public class Equipamento {
        }
    }
    
-   public void atualizarEquipamento(String nome, int id, String descricao, double valor_diario, boolean status, int quantidade) {
-        String sql = "UPDATE usuarios SET nome=?, descricao=?, valor_diario=?, status=?, quantidade=? WHERE id=?";
+   public void atualizarEquipamento(int id, String nome, String descricao, double valor_diario, int quantidade) {
+        String sql = "UPDATE usuarios SET nome=?, descricao=?, valor_diario=?, quantidade=? WHERE id=?";
         try (Connection conn = ConexaoMySQL.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nome);
             stmt.setString(2, descricao);
             stmt.setDouble(3, valor_diario);
-            stmt.setBoolean(4, status);
-            stmt.setInt(5, quantidade);
-            stmt.setInt(6, id);
+            stmt.setInt(4, quantidade);
+            stmt.setInt(5, id);
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

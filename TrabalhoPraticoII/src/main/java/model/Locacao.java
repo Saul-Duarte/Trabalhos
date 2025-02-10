@@ -7,6 +7,7 @@ package model;
 import controller.ConexaoMySQL;
 import java.sql.Connection;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,12 +16,13 @@ import javax.swing.table.DefaultTableModel;
  * @author sauls
  */
 public class Locacao {
-    public void inserirLocacao(Date dataInicio, Date dataTermino, double multa) {
+    public void inserirLocacao(LocalDate dataInicio, LocalDate dataTermino, double multa) {
+        java.sql.Date dataComeco = java.sql.Date.valueOf(dataInicio);
+        java.sql.Date dataFim = java.sql.Date.valueOf(dataTermino);
         String sql = "INSERT INTO locacoes (data_inicio, data_termino, multa, equipamento_id, cliente_id) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = ConexaoMySQL.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setDate(1, dataInicio);
-            stmt.setDate(2, dataTermino);
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDate(1, dataComeco);
+            stmt.setDate(2, dataFim);
             stmt.setDouble(3, multa);
             stmt.executeUpdate();
         } catch (Exception e) {
@@ -28,16 +30,13 @@ public class Locacao {
         }
     }
 
-    public void atualizarLocacao(int id, Date dataInicio, Date dataTermino, double multa, int equipamentoId, int clienteId) {
-        String sql = "UPDATE locacoes SET data_inicio=?, data_termino=?, multa=?, equipamento_id=?, cliente_id=? WHERE id=?";
+
+    public void atualizarLocacao(int id, Date dataTermino) {
+        String sql = "UPDATE locacoes SET data_termino=? WHERE id=?";
         try (Connection conn = ConexaoMySQL.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setDate(1, dataInicio);
-            stmt.setDate(2, dataTermino);
-            stmt.setDouble(3, multa);
-            stmt.setInt(4, equipamentoId);
-            stmt.setInt(5, clienteId);
-            stmt.setInt(6, id);
+            stmt.setDate(1, dataTermino);
+            stmt.setInt(2, id);
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

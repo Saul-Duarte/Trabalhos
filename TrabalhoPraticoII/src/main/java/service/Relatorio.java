@@ -1,33 +1,92 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package service;
 
-import java.time.LocalDate;
-import model.Cliente;
-import model.Locacao;
+import controller.ConexaoMySQL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-/**
- *
- * @author sauls
- */
 public class Relatorio {
-    //Relatório dos equipamentos mais alugadas, filtra o número de alugueis feitos para cada equipamento se o mesmo foi alugado
-    public static Map<String, Long> gerarRelatorioMaisAlugados(List<Locacao> locacoes) {
-        return locacoes.stream()
-                .flatMap(locacao -> locacao.getEquipamentos().stream()) // Equipamentos alugados
-                .collect(Collectors.groupingBy(equipamento -> equipamento.getNome(), Collectors.counting())); // Agrupa por nome
+    /**
+     * Obtém o histórico de locações detalhado por cliente.Retorna uma lista formatada com os dados de aluguel.
+     * @return
+     */
+    public List<String> obterHistoricoLocacoes() {
+        List<String> lista = new ArrayList<>();
+        String sql = "SELECT c.nome AS cliente, e.nome AS equipamento, l.data_inicio, l.data_devolucao, l.valor_total " +
+                     "FROM locacoes l " +
+                     "JOIN clientes c ON l.cliente_id = c.id " +
+                     "JOIN equipamentos e ON l.equipamento_id = e.id " +
+                     "ORDER BY c.nome, l.data_inicio";
+
+        try (Connection con = ConexaoMySQL.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(rs.getString("cliente") + " alugou " +
+                          rs.getString("equipamento") + " de " +
+                          rs.getDate("data_inicio") + " até " +
+                          rs.getDate("data_devolucao") + " por R$ " +
+                          rs.getDouble("valor_total"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao obter histórico de locações: " + e.getMessage());
+        }
+        return lista;
     }
 
-    //Relatório dos clientes com multas, filtra os clientes que possuem multas e os adiciona ao relatório
-    public static List<Cliente> gerarRelatorioClientesComMultas(List<Cliente> clientes) {
-        return clientes.stream()
-                .filter(cliente -> cliente.getLocacoes().stream() // Locações do cliente
-                        .anyMatch(locacao -> locacao.calcularMulta(LocalDate.now()) > 0)) // Verifica se há multas
-                .collect(Collectors.toList());
+    /**
+     * Obtém os equipamentos mais alugados, listando os 10 mais frequentes.Retorna uma lista formatada com o nome do equipamento e a quantidade de vezes que foi alugado.
+     * @return
+     */
+    public List<String> obterEquipamentosMaisAlugados() {
+        List<String> lista = new ArrayList<>();
+        String sql = "SELECT e.nome AS equipamento, COUNT(l.equipamento_id) AS quantidade_alugado " +
+                     "FROM locacoes l " +
+                     "JOIN equipamentos e ON l.equipamento_id = e.id " +
+                     "GROUP BY e.nome " +
+                     "ORDER BY quantidade_alugado DESC " +
+                     "LIMIT 10";
+
+        try (Connection con = ConexaoMySQL.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(rs.getString("equipamento") + " - Alugado " + rs.getInt("quantidade_alugado") + " vezes");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao obter equipamentos mais alugados: " + e.getMessage());
+        }
+        return lista;
     }
+        /**
+     * Obtém a lista de clientes com multas acumuladas, ordenados pelo maior valor.
+     * @return Lista formatada com o nome do cliente e o valor das multas.
+     */
+    public List<String> obterClientesComMultasAcumuladas() {
+        List<String> lista = new ArrayList<>();
+        String sql = "SELECT c.nome AS cliente, SUM(l.multa) AS total_multas " +
+                     "FROM locacoes l " +
+                     "JOIN clientes c ON l.cliente_id = c.id " +
+                     "WHERE l.multa > 0 " +
+                     "GROUP BY c.nome " +
+                     "ORDER BY total_multas DESC";
+
+        try (Connection con = ConexaoMySQL.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(rs.getString("cliente") + " - Multas: R$" + rs.getDouble("total_multas"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao obter clientes com multas acumuladas: " + e.getMessage());
+        }
+        return lista;
+    }
+
 }
