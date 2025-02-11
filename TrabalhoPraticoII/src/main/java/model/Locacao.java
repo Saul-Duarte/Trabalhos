@@ -229,4 +229,20 @@ public class Locacao {
         }
         return -1; // Retorna -1 se não encontrar a linha com o ID
     }
+    
+    public int obterIDEquipamentoPorLocacao (int id) {
+        String sql = "SELECT equipamento_id FROM locacao WHERE id=?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("equipamento_id");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;  // Retorna -1 caso o equipamento não seja encontrado
+    }
+    }
 }
