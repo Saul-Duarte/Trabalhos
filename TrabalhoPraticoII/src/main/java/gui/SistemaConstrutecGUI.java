@@ -266,6 +266,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -479,6 +480,8 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
         painelComAbas.addTab("Registro de Locações", panelGestLocacao);
 
+        panelRelatorios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         panelTabelaRelatorios.setLayout(new java.awt.CardLayout());
 
         tblEquipMaisAlugados.setModel(new javax.swing.table.DefaultTableModel(
@@ -613,6 +616,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tblEditarEquip);
 
         btnAlterarEquip.setText("Alterar");
+        btnAlterarEquip.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterarEquip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarEquipActionPerformed(evt);
@@ -620,6 +624,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         });
 
         btnExcluirEquip.setText("Excluir");
+        btnExcluirEquip.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluirEquip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirEquipActionPerformed(evt);
@@ -627,6 +632,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         });
 
         btnCancelarEditEquip.setText("Cancelar");
+        btnCancelarEditEquip.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarEditEquip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEditEquipActionPerformed(evt);
@@ -893,6 +899,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         panelTabelaEditarDados.add(panelEditarLocacoes, "editarLocacoes");
 
         btnEditarEquip.setText("Editar Equipamentos");
+        btnEditarEquip.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarEquip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarEquipActionPerformed(evt);
@@ -900,6 +907,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         });
 
         btnEditarClientes.setText("Editar Clientes");
+        btnEditarClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarClientesActionPerformed(evt);
@@ -907,6 +915,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         });
 
         btnEditarLocacacoes.setText("Editar Locações");
+        btnEditarLocacacoes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarLocacacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarLocacacoesActionPerformed(evt);
