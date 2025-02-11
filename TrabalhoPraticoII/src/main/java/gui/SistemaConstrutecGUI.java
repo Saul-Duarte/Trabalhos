@@ -1,3 +1,4 @@
+
 package gui;
 
 import controller.ConexaoMySQL;
@@ -1192,6 +1193,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         Equipamento equipamento = new Equipamento();
 
         int locacaoId = locacao.extrairLocacaoIdDoTexto(textoBusca);
+        int equipamentoId = locacao.obterIDEquipamentoPorLocacao(locacaoId);
 
         if (locacaoId == -1) {
             JOptionPane.showMessageDialog(this, "ID da locação inválido ou não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -1215,6 +1217,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             // Exclui a locação e atualiza o status do equipamento
             locacao.excluirLocacao(locacaoId);
             equipamento.atualizarStatusEquipamento(locacaoId, true);
+            equipamento.incrementarQuantidade(equipamentoId);
 
             // Exibe o resultado e a mensagem de sucesso
             resultado.append("Devolução feita com sucesso!").append("\n");
