@@ -76,26 +76,32 @@ public class Relatorio {
      * Obtém a lista de clientes com multas acumuladas, ordenados pelo maior valor.
      * @return Lista formatada com o nome do cliente e o valor das multas.
      */
-    public List<String> obterClientesComMultasAcumuladas() {
-        List<String> lista = new ArrayList<>();
-        String sql = "SELECT c.nome AS cliente, SUM(l.multa) AS total_multas " +
-                     "FROM locacao l " +
-                     "JOIN cliente c ON l.cliente_id = c.id " +
-                     "WHERE l.multa > 0 " +
-                     "GROUP BY c.nome " +
-                     "ORDER BY total_multas DESC";
+    public List<ClienteMulta> obterClientesComMultasAcumuladas() {
+    List<ClienteMulta> lista = new ArrayList<>();
 
-        try (Connection con = ConexaoMySQL.conectar();
-             PreparedStatement stmt = con.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+    String sql = "SELECT c.nome AS cliente, c.CPF AS cpf, SUM(l.multa) AS total_multas " +
+                 "FROM locacao l " +
+                 "JOIN cliente c ON l.cliente_id = c.id " +
+                 "WHERE l.multa > 0 " +
+                 "GROUP BY c.nome, c.CPF " +
+                 "ORDER BY total_multas DESC";
 
-            while (rs.next()) {
-                lista.add(rs.getString("cliente") + " - Multas: R$" + rs.getDouble("total_multas"));
-            }
-        } catch (SQLException e) {
-            System.err.println("Erro ao obter clientes com multas acumuladas: " + e.getMessage());
+    try (Connection con = ConexaoMySQL.conectar();
+         PreparedStatement stmt = con.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            String nome = rs.getString("cliente");
+            String cpf = rs.getString("cpf");
+            double totalMultas = rs.getDouble("total_multas");
+
+            lista.add(new ClienteMulta(nome, cpf, totalMultas));
         }
-        return lista;
+    } catch (SQLException e) {
+        System.err.println("Erro ao obter clientes com multas acumuladas: " + e.getMessage());
     }
+
+    return lista;
+}
 
 }

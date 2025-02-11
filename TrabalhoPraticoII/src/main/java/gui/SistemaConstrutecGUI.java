@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
+import service.ClienteMulta;
 import service.EquipamentoRelatorio;
 import service.Relatorio;
 
@@ -1121,31 +1122,34 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         Relatorio relatorio = new Relatorio();
 
         // Obtém a lista de clientes com multas acumuladas
-        List<String> clientesComMultas = relatorio.obterClientesComMultasAcumuladas();
+        List<ClienteMulta> clientesComMultas = relatorio.obterClientesComMultasAcumuladas();
 
-        // Obtém o modelo da tabela na GUI
-        DefaultTableModel modeloTabela = (DefaultTableModel) tblClientesMultas.getModel();
+        // Verifica se a lista está vazia
+        if (clientesComMultas.isEmpty()) {
+            // Exibe uma mensagem informando que não há clientes com multas acumuladas
+            JOptionPane.showMessageDialog(this, "Não há clientes com multas acumuladas.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Obtém o modelo da tabela na GUI
+            DefaultTableModel modeloTabela = (DefaultTableModel) tblClientesMultas.getModel();
 
-        // Limpa os dados atuais da tabela
-        modeloTabela.setRowCount(0);
+            // Limpa os dados atuais da tabela
+            modeloTabela.setRowCount(0);
 
-        // Adiciona os dados obtidos à tabela
-        for (String cliente : clientesComMultas) {
-            // Divide os dados no formato "Cliente - Multas: R$X"
-            String[] dados = cliente.split(" - Multas: R\\$");
-            if (dados.length == 2) {
-                String nomeCliente = dados[0];
-                String valorMultas = dados[1]; // Valor já está formatado como string
-
-                // Adiciona uma linha na tabela
-                modeloTabela.addRow(new Object[]{nomeCliente, valorMultas});
+            // Adiciona os dados obtidos à tabela
+            for (ClienteMulta cliente : clientesComMultas) {
+                // Adiciona uma linha na tabela com os dados do cliente
+                modeloTabela.addRow(new Object[]{
+                    cliente.getNome(),
+                    cliente.getCpf(),
+                    String.format("R$ %.2f", cliente.getTotalMultas()) // Formata as multas como moeda
+                });
             }
-        }
 
-        CardLayout card = (CardLayout) panelTabelaRelatorios.getLayout();
-        card.show(panelTabelaRelatorios, "multas");
+            // Troca para o painel de clientes com multas
+            CardLayout card = (CardLayout) panelTabelaRelatorios.getLayout();
+            card.show(panelTabelaRelatorios, "multas");
     }//GEN-LAST:event_btnClientesMultasActionPerformed
-
+    }
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String textoBusca = txaBusca.getText();
         if (textoBusca.isEmpty()) {
