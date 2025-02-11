@@ -885,7 +885,7 @@
                                       <Component id="jScrollPane4" min="-2" pref="472" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="40" max="32767" attributes="0"/>
+                              <EmptySpace pref="41" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -936,16 +936,22 @@
                         <Component class="javax.swing.JTable" name="tblEditarEquip">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="5" rowCount="4">
+                              <Table columnCount="6" rowCount="4">
                                 <Column editable="true" title="ID" type="java.lang.Object"/>
                                 <Column editable="true" title="Nome" type="java.lang.Object"/>
                                 <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
-                                <Column editable="true" title="Pre&#xe7;o Di&#xe1;rio" type="java.lang.Object"/>
+                                <Column editable="true" title="Valor Di&#xe1;rio" type="java.lang.Object"/>
+                                <Column editable="true" title="Satatus" type="java.lang.Object"/>
                                 <Column editable="true" title="Quantidade" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>
@@ -1084,7 +1090,7 @@
                                       <Component id="jScrollPane5" alignment="0" min="-2" pref="472" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="40" max="32767" attributes="0"/>
+                              <EmptySpace pref="41" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1248,7 +1254,7 @@
                                       <Component id="jScrollPane6" alignment="0" min="-2" pref="472" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="40" max="32767" attributes="0"/>
+                              <EmptySpace pref="41" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1284,17 +1290,23 @@
                         <Component class="javax.swing.JTable" name="tblEditarLocacao">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="6" rowCount="4">
+                              <Table columnCount="7" rowCount="4">
                                 <Column editable="true" title="ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Cliente" type="java.lang.Object"/>
-                                <Column editable="true" title="Equipamento" type="java.lang.Object"/>
-                                <Column editable="true" title="Data de In&#xed;cio" type="java.lang.Object"/>
-                                <Column editable="true" title="Data de T&#xe9;rmino" type="java.lang.Object"/>
+                                <Column editable="true" title="Data de Inicio" type="java.lang.Object"/>
+                                <Column editable="true" title="Data Termino" type="java.lang.Object"/>
                                 <Column editable="true" title="Multa" type="java.lang.Object"/>
+                                <Column editable="true" title="Equipamento" type="java.lang.Object"/>
+                                <Column editable="true" title="Cliente" type="java.lang.Object"/>
+                                <Column editable="true" title="Status Pendente" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>

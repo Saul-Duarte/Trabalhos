@@ -604,13 +604,13 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
         tblEditarEquip.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Descrição", "Preço Diário", "Quantidade"
+                "ID", "Nome", "Descrição", "Valor Diário", "Satatus", "Quantidade"
             }
         ));
         jScrollPane4.setViewportView(tblEditarEquip);
@@ -681,7 +681,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancelarEditEquip))
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         panelEditarEquipLayout.setVerticalGroup(
             panelEditarEquipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -786,7 +786,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancelarEditClientes))
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         panelEditarClientesLayout.setVerticalGroup(
             panelEditarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -817,13 +817,13 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
         tblEditarLocacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Cliente", "Equipamento", "Data de Início", "Data de Término", "Multa"
+                "ID", "Data de Inicio", "Data Termino", "Multa", "Equipamento", "Cliente", "Status Pendente"
             }
         ));
         jScrollPane6.setViewportView(tblEditarLocacao);
@@ -877,7 +877,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancelarEditLocacao))
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         panelEditarLocacoesLayout.setVerticalGroup(
             panelEditarLocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -938,7 +938,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                         .addComponent(btnEditarClientes)
                         .addGap(90, 90, 90)
                         .addComponent(btnEditarLocacacoes)
-                        .addContainerGap(18, Short.MAX_VALUE))))
+                        .addContainerGap(16, Short.MAX_VALUE))))
         );
         panelEditarDadosLayout.setVerticalGroup(
             panelEditarDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
