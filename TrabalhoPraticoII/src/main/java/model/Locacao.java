@@ -86,8 +86,8 @@ public class Locacao {
     
     public double calcularValorTotal(int locacaoId) {
         double total = 0;
-        String sqlEquipamentos = "SELECT e.valor_diario FROM equipamentos e " +
-                                 "JOIN locacoes l ON e.id = l.equipamento_id WHERE l.id = ?";
+        String sqlEquipamentos = "SELECT e.valor_diario FROM equipamento e " +
+                                 "JOIN locacao l ON e.id = l.equipamento_id WHERE l.id = ?";
 
         try (Connection conn = ConexaoMySQL.conectar();
              PreparedStatement stmt = conn.prepareStatement(sqlEquipamentos)) {
@@ -244,5 +244,60 @@ public class Locacao {
         }
         return -1;  // Retorna -1 caso o equipamento não seja encontrado
     }
+
+    public void excluirLocacaoPorCliente(int clienteId) {
+        String sql = "DELETE FROM locacao WHERE cliente_id =?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, clienteId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    public void alterarLocacaoPorCliente(int clienteId) {
+        String sql = "UPDATE locacao SET cliente_id =? WHERE id=?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, clienteId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean equipamentoVinculado(int equipamentoId) {
+        String sql = "SELECT COUNT(*) FROM locacao WHERE equipamento_id = ?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, equipamentoId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void excluirLocacoesPorEquipamento(int equipamentoId) {
+        String sql = "DELETE FROM locacoes WHERE equipamento_id = ?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, equipamentoId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void alterarLocacoesPorEquipamento(int equipamentoId) {
+        String sql = "UPDATE locacao SET equipamento_id =? WHERE id=?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, equipamentoId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

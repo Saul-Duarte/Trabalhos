@@ -1111,7 +1111,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 return;
             }
 
-            //Seleciona o equipamento no dropdown
+            // Seleciona o equipamento no dropdown
             int selectedIndex = dropEquip.getSelectedIndex();
             if (selectedIndex <= 0) {
                 JOptionPane.showMessageDialog(this, "Selecione um equipamento para a locação.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -1127,15 +1127,20 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             Equipamento equip = new Equipamento();
             String nome = dropEquip.getName();
             int equipamentoId = equip.obterIdEquipamento(nome);
-            
+
             if (!equip.obterStatusEquipamento(equipamentoId)) {
                 JOptionPane.showMessageDialog(this, "O equipamento selecionado já está alugado!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             Cliente cliente = new Cliente();
-            cliente.inserirCliente(nomeCliente, cpf, telefone);
             int clienteId = cliente.obterIdCliente(cpf);
+
+            if (clienteId == 0) {
+                // Se o cliente não existir, insere e obtém o novo ID
+                cliente.inserirCliente(nomeCliente, cpf, telefone);
+                clienteId = cliente.obterIdCliente(cpf);
+            }
 
             Locacao locacao = new Locacao();
             locacao.inserirLocacao(dataInicio, dataFim, multaPercentual, equipamentoId, clienteId);
@@ -1144,11 +1149,11 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
             equip.atualizarStatusEquipamento(equipamentoId, false);
             equip.decrementarQuantidade(equipamentoId);
-            limparCamposRegistro(); //Limpa os campos
-            inicializarDropdownEquipamentos(); //Atualiza o dropdown após a locação
+            limparCamposRegistro(); // Limpa os campos
+            inicializarDropdownEquipamentos(); // Atualiza o dropdown após a locação
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao registrar locação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace(); //Para depuração
+            e.printStackTrace(); // Para depuração
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -1308,6 +1313,8 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         int id = (int) tblEditarClientes.getValueAt(row, 0);
         cliente.atualizarCliente(id, txtNomeEditClientes.getText(), txtCPFEdit.getText(), txtTelefoneEdit.getText());
         limparCamposClientesEdit();
+        Locacao locacao = new Locacao();
+        locacao.alterarLocacaoPorCliente(id);
         listarClientes();
     }//GEN-LAST:event_btnAlterarClientesActionPerformed
 
@@ -1316,6 +1323,8 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         int row = tblEditarClientes.getSelectedRow();
         int id = (int) tblEditarClientes.getValueAt(row, 0);
         cliente.excluirCliente(id);
+        Locacao locacao = new Locacao();
+        locacao.excluirLocacaoPorCliente(id);
         listarClientes();
     }//GEN-LAST:event_btnExcluirClientesActionPerformed
 
@@ -1330,6 +1339,10 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         int row = tblEditarEquip.getSelectedRow();
         int id = (int) tblEditarEquip.getValueAt(row, 0);
         equip.atualizarEquipamento(id, txtNomeEdit.getText(), txtDescricaoEdit.getText(), preco, quantidade);
+        Locacao locacao = new Locacao();
+        if (locacao.equipamentoVinculado(id)) {
+            locacao.alterarLocacoesPorEquipamento(id);
+        }
         limparCamposEquipamentosEdit();
         listarEquipamentos();
     }//GEN-LAST:event_btnAlterarEquipActionPerformed
@@ -1338,6 +1351,10 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         Equipamento equip = new Equipamento();
         int row = tblEditarEquip.getSelectedRow();
         int id = (int) tblEditarEquip.getValueAt(row, 0);
+        Locacao locacao = new Locacao();
+        if (locacao.equipamentoVinculado(id)) {
+            locacao.excluirLocacoesPorEquipamento(id);
+        }
         equip.excluirEquipamento(id);
         listarEquipamentos();
     }//GEN-LAST:event_btnExcluirEquipActionPerformed

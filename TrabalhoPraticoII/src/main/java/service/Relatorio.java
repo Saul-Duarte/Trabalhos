@@ -16,9 +16,9 @@ public class Relatorio {
     public List<String> obterHistoricoLocacoes() {
         List<String> lista = new ArrayList<>();
         String sql = "SELECT c.nome AS cliente, e.nome AS equipamento, l.data_inicio, l.data_devolucao, l.valor_total " +
-                     "FROM locacoes l " +
-                     "JOIN clientes c ON l.cliente_id = c.id " +
-                     "JOIN equipamentos e ON l.equipamento_id = e.id " +
+                     "FROM locacao l " +
+                     "JOIN cliente c ON l.cliente_id = c.id " +
+                     "JOIN equipamento e ON l.equipamento_id = e.id " +
                      "ORDER BY c.nome, l.data_inicio";
 
         try (Connection con = ConexaoMySQL.conectar();
@@ -45,8 +45,8 @@ public class Relatorio {
     public List<String> obterEquipamentosMaisAlugados() {
         List<String> lista = new ArrayList<>();
         String sql = "SELECT e.nome AS equipamento, COUNT(l.equipamento_id) AS quantidade_alugado " +
-                     "FROM locacoes l " +
-                     "JOIN equipamentos e ON l.equipamento_id = e.id " +
+                     "FROM locacao l " +
+                     "JOIN equipamento e ON l.equipamento_id = e.id " +
                      "GROUP BY e.nome " +
                      "ORDER BY quantidade_alugado DESC " +
                      "LIMIT 10";
@@ -70,8 +70,8 @@ public class Relatorio {
     public List<String> obterClientesComMultasAcumuladas() {
         List<String> lista = new ArrayList<>();
         String sql = "SELECT c.nome AS cliente, SUM(l.multa) AS total_multas " +
-                     "FROM locacoes l " +
-                     "JOIN clientes c ON l.cliente_id = c.id " +
+                     "FROM locacao l " +
+                     "JOIN cliente c ON l.cliente_id = c.id " +
                      "WHERE l.multa > 0 " +
                      "GROUP BY c.nome " +
                      "ORDER BY total_multas DESC";
