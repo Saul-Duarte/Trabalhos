@@ -79,12 +79,12 @@ public class Relatorio {
     public List<ClienteMulta> obterClientesComMultasAcumuladas() {
     List<ClienteMulta> lista = new ArrayList<>();
 
-    String sql = "SELECT c.nome AS cliente, c.CPF AS cpf, SUM(l.multa) AS total_multas " +
+    String sql = "SELECT c.nome AS cliente, c.CPF AS cpf, SUM(l.multa_paga) AS total_multa " +
                  "FROM locacao l " +
                  "JOIN cliente c ON l.cliente_id = c.id " +
-                 "WHERE l.multa > 0 " +
+                 "WHERE l.multa_paga > 0 " +
                  "GROUP BY c.nome, c.CPF " +
-                 "ORDER BY total_multas DESC";
+                 "ORDER BY total_multa DESC";
 
     try (Connection con = ConexaoMySQL.conectar();
          PreparedStatement stmt = con.prepareStatement(sql);

@@ -216,7 +216,7 @@ public class Locacao {
                 resultado.append("Data Início: ").append(rs.getDate("data_inicio")).append("\n");
                 resultado.append("Data Término: ").append(rs.getDate("data_termino")).append("\n");
                 double multa = rs.getDouble("multa");
-                resultado.append("Multa: ").append(String.format("%.0f%%", multa * 100)).append("\n");
+                resultado.append("Taxa da Multa: ").append(String.format("%.0f%%", multa * 100)).append("\n");
                 resultado.append("Equipamento ID: ").append(rs.getInt("equipamento_id")).append("\n");
                 resultado.append("Cliente ID: ").append(rs.getInt("cliente_id")).append("\n");
                 resultado.append("----------------------------\n"); // Separador entre registros
@@ -338,4 +338,14 @@ public class Locacao {
         e.printStackTrace();
     }
 }
+    public void atualizarMultaPaga(int locacaoId, double multa) throws SQLException {
+    String sql = "UPDATE locacao SET multa_paga = ? WHERE id = ?";
+    try (Connection conn = ConexaoMySQL.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setDouble(1, multa);
+        stmt.setInt(2, locacaoId);
+        stmt.executeUpdate();
+    }
+}
+
 }

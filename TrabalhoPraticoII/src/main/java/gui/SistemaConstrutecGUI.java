@@ -1183,12 +1183,15 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
    
 
         try {
+            // Atualiza a multa no banco de dados
+            locacao.atualizarMultaPaga(locacaoId, multa);
+            
             // Exclui a locação e atualiza o status do equipamento
             locacao.marcarLocacaoComoNaoPendente(locacaoId);
             equipamento.atualizarStatusEquipamento(locacaoId, true);
             equipamento.incrementarQuantidade(equipamentoId);
 
-            resultado.append("Multa: ").append(String.format("%.2f%%", multa * 100)).append("\n");
+            resultado.append("Multa: ").append(multa).append("\n");
             resultado.append("Valor do Aluguel: ").append(ValorAluguel).append("\n");
             resultado.append("Valor total a pagar: ").append(ValorTotal).append("\n");
             resultado.append("Devolucão feita com sucesso! ").append("\n");
