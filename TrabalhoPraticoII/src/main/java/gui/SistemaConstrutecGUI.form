@@ -63,18 +63,18 @@
                           <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnCancelar" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtPreco" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtDesc" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtQuant" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtNome" min="-2" pref="400" max="-2" attributes="0"/>
+                          <Component id="txtDesc" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPreco" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -329,7 +329,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lblDadosCliente" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -338,44 +338,38 @@
                                           <Component id="lblNomeRegistro2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtTelefone" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                                          <Component id="txtCPF" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                                          <Component id="txtNomeRegistro" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtNomeRegistro" alignment="0" pref="300" max="32767" attributes="0"/>
+                                          <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtTelefone" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="lblEquip" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                      <Component id="dropEquip" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <Component id="dropEquip" min="-2" pref="250" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblDatas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDataInicio" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblDataTermino" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtDataInicio" max="32767" attributes="0"/>
+                                          <Component id="txtDataTermino" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="122" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblMulta" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="txtMulta" min="-2" pref="127" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtMulta" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lblAviso1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblDataTermino" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtDataInicio" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="txtDataTermino" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="lblDatas" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDataInicio" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
