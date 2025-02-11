@@ -98,25 +98,43 @@ public class Equipamento {
     }
     
     public void atualizarStatusEquipamento(int id, boolean status) {
-        String sql = "UPDATE equipamento SET status = ? WHERE id = ?";
+    String sqlVerificaQuantidade = "SELECT quantidade FROM equipamento WHERE id = ?";
+    String sqlAtualizaStatus = "UPDATE equipamento SET status = ? WHERE id = ?";
 
-        try (Connection conn = ConexaoMySQL.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try (Connection conn = ConexaoMySQL.conectar();
+         PreparedStatement stmtVerificaQuantidade = conn.prepareStatement(sqlVerificaQuantidade);
+         PreparedStatement stmtAtualizaStatus = conn.prepareStatement(sqlAtualizaStatus)) {
 
-            stmt.setBoolean(1, status);
-            stmt.setInt(2, id);
-            int linhasAfetadas = stmt.executeUpdate();
-
-            if (linhasAfetadas > 0) {
-                System.out.println("Status do equipamento atualizado com sucesso!");
-            } else {
+        // Verifica a quantidade do equipamento
+        stmtVerificaQuantidade.setInt(1, id);
+        try (ResultSet rs = stmtVerificaQuantidade.executeQuery()) {
+            if (!rs.next()) {
                 System.out.println("Nenhum equipamento encontrado com o ID informado.");
+                return; // Sai do método se o equipamento não for encontrado
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            int quantidade = rs.getInt("quantidade");
+
+            // Se a quantidade for maior que 0 e o status for false, não atualiza
+            if (quantidade > 0 && !status) {
+                System.out.println("Quantidade maior que 0. Status nao foi alterado para false.");
+                return;
+            } else{
+                // Atualiza o status do equipamento
+               stmtAtualizaStatus.setBoolean(1, status);
+               stmtAtualizaStatus.setInt(2, id);
+               int linhasAfetadas = stmtAtualizaStatus.executeUpdate();
+
+               if (linhasAfetadas > 0) {
+                   System.out.println("Status do equipamento atualizado com sucesso!");
+               }
+            }
         }
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
     public boolean obterStatusEquipamento(int id) {
         String sql = "SELECT status FROM equipamento WHERE id=?";

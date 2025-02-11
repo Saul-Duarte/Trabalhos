@@ -11,6 +11,7 @@ import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -420,7 +421,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtMulta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblAviso1))))
+                        .addComponent(lblAviso1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         panelGestLocacaoLayout.setVerticalGroup(
             panelGestLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -978,10 +979,6 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecoActionPerformed
 
-    private void dropEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropEquipActionPerformed
-
-    }//GEN-LAST:event_dropEquipActionPerformed
-
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
@@ -1118,94 +1115,6 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         txtBuscar.setText("");
     }//GEN-LAST:event_btnCancelarDevoActionPerformed
 
-    private void btnCancelarRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRegActionPerformed
-        limparCamposRegistro();
-    }//GEN-LAST:event_btnCancelarRegActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        try {
-            String nomeCliente = txtNomeRegistro.getText().trim();
-            String cpf = txtCPF.getText().trim();
-            String telefone = txtTelefone.getText().trim();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText().trim(), formatter);
-            LocalDate dataFim = LocalDate.parse(txtDataTermino.getText().trim(), formatter);
-            double multaPercentual = txtMulta.getText().isEmpty() ? 10.0 : Double.parseDouble(txtMulta.getText());
-
-            // Validação de campos obrigatórios
-            if (nomeCliente.isEmpty() || cpf.isEmpty() || telefone.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Validação: Nome deve conter apenas letras e espaços
-            if (!nomeCliente.matches("[A-Za-zÀ-ÖØ-öø-ÿ ]+")) {
-                JOptionPane.showMessageDialog(this, "Nome inválido! Digite apenas letras.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Validação: CPF deve conter apenas números e ter 11 dígitos
-            if (!cpf.matches("\\d{11}")) {
-                JOptionPane.showMessageDialog(this, "CPF inválido! Deve conter exatamente 11 números.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Validação: Telefone deve conter apenas números e ter entre 10 e 11 dígitos
-            if (!telefone.matches("\\d{10,11}")) {
-                JOptionPane.showMessageDialog(this, "Telefone inválido! Deve conter apenas números (DDD + número).", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Seleciona o equipamento no dropdown
-            int selectedIndex = dropEquip.getSelectedIndex();
-            if (selectedIndex <= 0) {
-                JOptionPane.showMessageDialog(this, "Selecione um equipamento para a locação.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Validação: A data de início não pode ser posterior à data de término
-            if (dataInicio.isAfter(dataFim)) {
-                JOptionPane.showMessageDialog(this, "A data de início não pode ser depois da data de término!", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            Equipamento equip = new Equipamento();
-            String nome = dropEquip.getName();
-            int equipamentoId = equip.obterIdEquipamento(nome);
-
-            if (!equip.obterStatusEquipamento(equipamentoId)) {
-                JOptionPane.showMessageDialog(this, "O equipamento selecionado já está alugado!", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            Cliente cliente = new Cliente();
-            int clienteId = cliente.obterIdCliente(cpf);
-
-            if (clienteId == 0) {
-                // Se o cliente não existir, insere e obtém o novo ID
-                cliente.inserirCliente(nomeCliente, cpf, telefone);
-                clienteId = cliente.obterIdCliente(cpf);
-            }
-
-            Locacao locacao = new Locacao();
-            locacao.inserirLocacao(dataInicio, dataFim, multaPercentual, equipamentoId, clienteId);
-
-            JOptionPane.showMessageDialog(this, "Locação registrada com sucesso!");
-
-            equip.atualizarStatusEquipamento(equipamentoId, false);
-            equip.decrementarQuantidade(equipamentoId);
-            limparCamposRegistro(); // Limpa os campos
-            inicializarDropdownEquipamentos(); // Atualiza o dropdown após a locação
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao registrar locação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace(); // Para depuração
-        }
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void txtDataTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataTerminoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataTerminoActionPerformed
-
     private void btnClientesMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesMultasActionPerformed
         // Instancia a classe Relatorio
         Relatorio relatorio = new Relatorio();
@@ -1238,6 +1147,10 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String textoBusca = txaBusca.getText();
+        if (textoBusca.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O campo de busca não pode estar vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Locacao locacao = new Locacao();
         StringBuilder resultado = new StringBuilder();
         Equipamento equipamento = new Equipamento();
@@ -1254,24 +1167,29 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         Date dataDevolucao = Date.valueOf(data);
 
         double multa = locacao.calcularMulta(locacaoId, dataDevolucao);
-        double ValorAluguel = locacao.calcularValorTotal(locacaoId);
+        double ValorAluguel = 0;
+        try {
+            ValorAluguel = locacao.calcularValorTotal(locacaoId);
+        } catch (Locacao.LocacaoNaoEncontradaException ex) {
+            Logger.getLogger(SistemaConstrutecGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         double ValorTotal = multa + ValorAluguel;
 
-        resultado.append("Multa: ").append(multa).append("\n");
-        resultado.append("Valor do Aluguel: ").append(ValorAluguel).append("\n");
-        resultado.append("Valor total a pagar: ").append(ValorTotal).append("\n");
-        resultado.append("Devolucão feita com sucesso! ").append("\n");
-        JOptionPane.showMessageDialog(this, resultado.toString(), "Resumo da Devolução", JOptionPane.INFORMATION_MESSAGE);
+   
 
         try {
             // Exclui a locação e atualiza o status do equipamento
-            locacao.excluirLocacao(locacaoId);
+            locacao.marcarLocacaoComoNaoPendente(locacaoId);
             equipamento.atualizarStatusEquipamento(locacaoId, true);
             equipamento.incrementarQuantidade(equipamentoId);
 
-            // Exibe o resultado e a mensagem de sucesso
-            resultado.append("Devolução feita com sucesso!").append("\n");
+            resultado.append("Multa: ").append(String.format("%.2f%%", multa * 100)).append("\n");
+            resultado.append("Valor do Aluguel: ").append(ValorAluguel).append("\n");
+            resultado.append("Valor total a pagar: ").append(ValorTotal).append("\n");
+            resultado.append("Devolucão feita com sucesso! ").append("\n");
             JOptionPane.showMessageDialog(this, resultado.toString(), "Resumo da Devolução", JOptionPane.INFORMATION_MESSAGE);
+            txaBusca.setText("");
+            txtBuscar.setText("");
         } catch (Exception e) {
             // Exibe mensagem de erro em caso de falha
             JOptionPane.showMessageDialog(this, "Erro ao confirmar devolução: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -1407,6 +1325,98 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private void btnCancelarEditEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditEquipActionPerformed
         limparCamposEquipamentosEdit();
     }//GEN-LAST:event_btnCancelarEditEquipActionPerformed
+
+    private void btnCancelarRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRegActionPerformed
+        limparCamposRegistro();
+    }//GEN-LAST:event_btnCancelarRegActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        try {
+            String nomeCliente = txtNomeRegistro.getText().trim();
+            String cpf = txtCPF.getText().trim();
+            String telefone = txtTelefone.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText().trim(), formatter);
+            LocalDate dataFim = LocalDate.parse(txtDataTermino.getText().trim(), formatter);
+            double multaPercentual = txtMulta.getText().isEmpty() ? 0.10 : Double.parseDouble(txtMulta.getText())/100;
+
+            // Validação de campos obrigatórios
+            if (nomeCliente.isEmpty() || cpf.isEmpty() || telefone.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validação: Nome deve conter apenas letras e espaços
+            if (!nomeCliente.matches("[A-Za-zÀ-ÖØ-öø-ÿ ]+")) {
+                JOptionPane.showMessageDialog(this, "Nome inválido! Digite apenas letras.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validação: CPF deve conter apenas números e ter 11 dígitos
+            if (!cpf.matches("\\d{11}")) {
+                JOptionPane.showMessageDialog(this, "CPF inválido! Deve conter exatamente 11 números.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validação: Telefone deve conter apenas números e ter entre 10 e 11 dígitos
+            if (!telefone.matches("\\d{10,11}")) {
+                JOptionPane.showMessageDialog(this, "Telefone inválido! Deve conter apenas números (DDD + número).", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Seleciona o equipamento no dropdown
+            int selectedIndex = dropEquip.getSelectedIndex();
+            if (selectedIndex <= 0) {
+                JOptionPane.showMessageDialog(this, "Selecione um equipamento para a locação.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validação: A data de início não pode ser posterior à data de término
+            if (dataInicio.isAfter(dataFim)) {
+                JOptionPane.showMessageDialog(this, "A data de início não pode ser depois da data de término!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Equipamento equip = new Equipamento();
+            String nome = (String) dropEquip.getSelectedItem().toString();
+            int equipamentoId = equip.obterIdEquipamento(nome);
+
+            if (!equip.obterStatusEquipamento(equipamentoId)) {
+                JOptionPane.showMessageDialog(this, "O equipamento selecionado já está alugado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Cliente cliente = new Cliente();
+            int clienteId = cliente.obterIdCliente(cpf);
+
+            if (clienteId == 0) {
+                // Se o cliente não existir, insere e obtém o novo ID
+                cliente.inserirCliente(nomeCliente, cpf, telefone);
+                clienteId = cliente.obterIdCliente(cpf);
+            }
+
+            Locacao locacao = new Locacao();
+            locacao.inserirLocacao(dataInicio, dataFim, multaPercentual, equipamentoId, clienteId);
+
+            JOptionPane.showMessageDialog(this, "Locação registrada com sucesso!");
+
+            equip.atualizarStatusEquipamento(equipamentoId, false);
+            equip.decrementarQuantidade(equipamentoId);
+            limparCamposRegistro(); // Limpa os campos
+            inicializarDropdownEquipamentos(); // Atualiza o dropdown após a locação
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao registrar locação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace(); // Para depuração
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtDataTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataTerminoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataTerminoActionPerformed
+
+    private void dropEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropEquipActionPerformed
+
+    }//GEN-LAST:event_dropEquipActionPerformed
 
     
     

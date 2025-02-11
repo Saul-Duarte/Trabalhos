@@ -15,7 +15,7 @@ public class Relatorio {
      */
     public List<String> obterHistoricoLocacoes() {
         List<String> lista = new ArrayList<>();
-        String sql = "SELECT c.nome AS cliente, e.nome AS equipamento, l.data_inicio, l.data_devolucao, l.valor_total " +
+        String sql = "SELECT c.nome AS cliente, e.nome AS equipamento, l.data_inicio, l.data_termino, l.valor_total " +
                      "FROM locacao l " +
                      "JOIN cliente c ON l.cliente_id = c.id " +
                      "JOIN equipamento e ON l.equipamento_id = e.id " +
