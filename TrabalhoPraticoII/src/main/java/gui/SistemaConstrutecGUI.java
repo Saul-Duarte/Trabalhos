@@ -1021,17 +1021,68 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // O botão registra os equipamentos no banco de dados se as informações estiverem corretas
+            // O botão registra os equipamentos no banco de dados se as informações estiverem corretas
         try (Connection conexao = ConexaoMySQL.conectar()) {
-            String nome = txtNome.getText();
-            String descricao = txtDesc.getText();
-            double valorDiario = Double.parseDouble(txtPreco.getText());
-            int quantidade = Integer.parseInt(txtQuant.getText());
+            String nome = txtNome.getText().trim();
+            String descricao = txtDesc.getText().trim();
+            String precoTexto = txtPreco.getText().trim();
+            String quantidadeTexto = txtQuant.getText().trim();
 
             // Verificar se os campos estão preenchidos
-            if (nome.isEmpty() || descricao.isEmpty() || txtPreco.getText().isEmpty() || txtQuant.getText().isEmpty()) {
+            if (nome.isEmpty() || descricao.isEmpty() || precoTexto.isEmpty() || quantidadeTexto.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
+            }
+
+            // Validar tamanho dos campos
+            if (nome.length() > 255) {
+                JOptionPane.showMessageDialog(this, "O nome do equipamento deve ter no máximo 255 caracteres!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (descricao.length() > 500) {
+                JOptionPane.showMessageDialog(this, "A descrição não pode ultrapassar 500 caracteres!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validar caracteres no nome (apenas letras e espaços)
+            if (!nome.matches("[A-Za-zÀ-ÖØ-öø-ÿ ]+")) {
+                JOptionPane.showMessageDialog(this, "O nome do equipamento deve conter apenas letras!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Tenta converter os valores para números e valida a quantidade
+            double valorDiario;
+            int quantidade;
+
+            try {
+                valorDiario = Double.parseDouble(precoTexto);
+                quantidade = Integer.parseInt(quantidadeTexto);
+
+                if (quantidade <= 0) {
+                    JOptionPane.showMessageDialog(this, "A quantidade não pode ser menor ou igual que 0!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (valorDiario < 1.00 || valorDiario > 10000.00) {
+                    JOptionPane.showMessageDialog(this, "O valor diário deve estar entre R$1,00 e R$10.000,00!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Valor ou quantidade inválidos! Insira apenas números.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Verificar se já existe um equipamento com o mesmo nome
+            String checkSql = "SELECT COUNT(*) FROM equipamento WHERE nome = ?";
+            try (PreparedStatement checkStmt = conexao.prepareStatement(checkSql)) {
+                checkStmt.setString(1, nome);
+                ResultSet rs = checkStmt.executeQuery();
+
+                if (rs.next() && rs.getInt(1) > 0) {
+                    JOptionPane.showMessageDialog(this, "Já existe um equipamento com esse nome!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
 
             // SQL para inserir os dados
@@ -1054,8 +1105,6 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Falha ao cadastrar equipamento.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Preencha os campos corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
