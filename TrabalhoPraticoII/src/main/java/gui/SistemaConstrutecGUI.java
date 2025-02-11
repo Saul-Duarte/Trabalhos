@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
+import service.EquipamentoRelatorio;
 import service.Relatorio;
 
 public class SistemaConstrutecGUI extends javax.swing.JFrame {
@@ -985,11 +986,11 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
 
     private void btnEquipMaisAlugadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquipMaisAlugadosActionPerformed
 
-        // Instancia a classe Relatorio
+                // Instancia a classe Relatorio
         Relatorio relatorio = new Relatorio();
 
         // Obtém a lista de equipamentos mais alugados
-        List<String> equipamentosMaisAlugados = relatorio.obterEquipamentosMaisAlugados();
+        List<EquipamentoRelatorio> equipamentosMaisAlugados = relatorio.obterEquipamentosMaisAlugados();
 
         // Obtém o modelo da tabela na GUI
         DefaultTableModel modeloTabela = (DefaultTableModel) tblEquipMaisAlugados.getModel();
@@ -998,17 +999,17 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         modeloTabela.setRowCount(0);
 
         // Adiciona os dados obtidos à tabela
-        for (String equipamento : equipamentosMaisAlugados) {
-            // Divide os dados no formato "Equipamento - Alugado X vezes"
-            String[] dados = equipamento.split(" - Alugado ");
-            if (dados.length == 2) {
-                String nomeEquipamento = dados[0];
-                String quantidadeAlugado = dados[1].replace(" vezes", ""); // Remove o texto extra
-
-                // Adiciona uma linha na tabela
-                modeloTabela.addRow(new Object[]{nomeEquipamento, quantidadeAlugado});
-            }
+        for (EquipamentoRelatorio equipamento : equipamentosMaisAlugados) {
+            // Adiciona uma linha na tabela com os dados do equipamento
+            modeloTabela.addRow(new Object[]{
+                equipamento.getNome(),
+                equipamento.getCodigo(),
+                equipamento.getQuantidadeAlugado(),
+                String.format("R$ %.2f", equipamento.getReceitaTotal()) // Formata a receita como moeda
+            });
         }
+
+        // Exibe o painel de equipamentos
         CardLayout card = (CardLayout) panelTabelaRelatorios.getLayout();
         card.show(panelTabelaRelatorios, "equipamentos");
     }//GEN-LAST:event_btnEquipMaisAlugadosActionPerformed

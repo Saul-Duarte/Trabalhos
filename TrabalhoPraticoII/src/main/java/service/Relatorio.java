@@ -42,26 +42,35 @@ public class Relatorio {
      * Obtém os equipamentos mais alugados, listando os 10 mais frequentes.Retorna uma lista formatada com o nome do equipamento e a quantidade de vezes que foi alugado.
      * @return
      */
-    public List<String> obterEquipamentosMaisAlugados() {
-        List<String> lista = new ArrayList<>();
-        String sql = "SELECT e.nome AS equipamento, COUNT(l.equipamento_id) AS quantidade_alugado " +
-                     "FROM locacao l " +
-                     "JOIN equipamento e ON l.equipamento_id = e.id " +
-                     "GROUP BY e.nome " +
-                     "ORDER BY quantidade_alugado DESC " +
-                     "LIMIT 10";
+    public List<EquipamentoRelatorio> obterEquipamentosMaisAlugados() {
+        List<EquipamentoRelatorio> equipamentos = new ArrayList<>();
 
-        try (Connection con = ConexaoMySQL.conectar();
-             PreparedStatement stmt = con.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+    String sql = "SELECT e.nome AS nome_equipamento, e.id AS codigo_equipamento, " +
+                 "COUNT(l.id) AS quantidade_alugado, " +
+                 "SUM(e.valor_diario * DATEDIFF(l.data_termino, l.data_inicio)) AS receita_total " +
+                 "FROM equipamento e " +
+                 "JOIN locacao l ON e.id = l.equipamento_id " +
+                 "GROUP BY e.id " +
+                 "ORDER BY quantidade_alugado DESC";
 
-            while (rs.next()) {
-                lista.add(rs.getString("equipamento") + " - Alugado " + rs.getInt("quantidade_alugado") + " vezes");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erro ao obter equipamentos mais alugados: " + e.getMessage());
+    try (Connection conn = ConexaoMySQL.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            String nome = rs.getString("nome_equipamento");
+            int codigo = rs.getInt("codigo_equipamento");
+            int quantidadeAlugado = rs.getInt("quantidade_alugado");
+            double receitaTotal = rs.getDouble("receita_total");
+
+            equipamentos.add(new EquipamentoRelatorio(nome, codigo, quantidadeAlugado, receitaTotal));
         }
-        return lista;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+        return equipamentos;
     }
         /**
      * Obtém a lista de clientes com multas acumuladas, ordenados pelo maior valor.
