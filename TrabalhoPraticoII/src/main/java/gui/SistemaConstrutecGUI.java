@@ -1346,7 +1346,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText().trim(), formatter);
             LocalDate dataFim = LocalDate.parse(txtDataTermino.getText().trim(), formatter);
-            double multaPercentual = txtMulta.getText().isEmpty() ? 0.10 : Double.parseDouble(txtMulta.getText())/100;
+            double multaPercentual = txtMulta.getText().isEmpty() ? 10 : Double.parseDouble(txtMulta.getText())/100;
 
             // Validação de campos obrigatórios
             if (nomeCliente.isEmpty() || cpf.isEmpty() || telefone.isEmpty()) {

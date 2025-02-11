@@ -186,7 +186,7 @@ public class Locacao {
                     while (rs.next()) {
                         double valorDiario = rs.getDouble("valor_diario");
                         double multaDiaria = obterMultaDiaria(locacaoId); // Método para obter a multa diária da locação
-                        multaTotal += valorDiario * (multaDiaria / 100) * diasAtraso;
+                        multaTotal += valorDiario * (multaDiaria) * diasAtraso;
                     }
                 }
             } catch (SQLException e) {

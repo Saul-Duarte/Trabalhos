@@ -93,7 +93,7 @@ public class Relatorio {
         while (rs.next()) {
             String nome = rs.getString("cliente");
             String cpf = rs.getString("cpf");
-            double totalMultas = rs.getDouble("total_multas");
+            double totalMultas = rs.getDouble("total_multa");
 
             lista.add(new ClienteMulta(nome, cpf, totalMultas));
         }
