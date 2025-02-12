@@ -61,7 +61,8 @@ public class Locacao {
                     rs.getDate("data_termino"),
                     rs.getBigDecimal("multa"),
                     rs.getInt("equipamento_id"),
-                    rs.getInt("cliente_id")
+                    rs.getInt("cliente_id"),
+                    rs.getBoolean("status_pendente")
                 });
             }
         } catch (Exception e) {
@@ -158,7 +159,7 @@ public class Locacao {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getDate("data_termino");
-                }
+                } 
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -196,45 +197,46 @@ public class Locacao {
         return multaTotal;
     }
     public void buscarLocacaoPorCPF(String cpfOuCodigo, JTextArea textArea) {
-    StringBuilder resultado = new StringBuilder(); // Para construir a string formatada
-    String sql = "SELECT l.id, l.data_inicio, l.data_termino, l.multa, l.equipamento_id, l.cliente_id " +
-                 "FROM locacao l " +
-                 "JOIN cliente c ON l.cliente_id = c.id " +
-                 "WHERE c.cpf = ? AND l.status_pendente = TRUE"; // Filtra apenas locações pendentes
+        StringBuilder resultado = new StringBuilder(); // Para construir a string formatada
+        String sql = "SELECT l.id, l.data_inicio, l.data_termino, l.multa, l.equipamento_id, l.cliente_id " +
+                     "FROM locacao l " +
+                     "JOIN cliente c ON l.cliente_id = c.id " +
+                     "WHERE (c.cpf = ? OR l.id = ?) AND l.status_pendente = TRUE"; // Filtra apenas locações pendentes
 
-    try (Connection conn = ConexaoMySQL.conectar();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        stmt.setString(1, cpfOuCodigo);
-        try (ResultSet rs = stmt.executeQuery()) {
-            boolean encontrouRegistros = false; // Flag para verificar se há registros
+            stmt.setString(1, cpfOuCodigo);
+            stmt.setInt(2, Integer.parseInt(cpfOuCodigo));
+            try (ResultSet rs = stmt.executeQuery()) {
+                boolean encontrouRegistros = false; // Flag para verificar se há registros
 
-            while (rs.next()) {
-                encontrouRegistros = true; // Marca que pelo menos um registro foi encontrado
-                // Formata os dados e adiciona ao StringBuilder
-                resultado.append("ID: ").append(rs.getInt("id")).append("\n");
-                resultado.append("Data Início: ").append(rs.getDate("data_inicio")).append("\n");
-                resultado.append("Data Término: ").append(rs.getDate("data_termino")).append("\n");
-                double multa = rs.getDouble("multa");
-                resultado.append("Taxa da Multa: ").append(String.format("%.0f%%", multa * 100)).append("\n");
-                resultado.append("Equipamento ID: ").append(rs.getInt("equipamento_id")).append("\n");
-                resultado.append("Cliente ID: ").append(rs.getInt("cliente_id")).append("\n");
-                resultado.append("----------------------------\n"); // Separador entre registros
+                while (rs.next()) {
+                    encontrouRegistros = true; // Marca que pelo menos um registro foi encontrado
+                    // Formata os dados e adiciona ao StringBuilder
+                    resultado.append("ID: ").append(rs.getInt("id")).append("\n");
+                    resultado.append("Data Início: ").append(rs.getDate("data_inicio")).append("\n");
+                    resultado.append("Data Término: ").append(rs.getDate("data_termino")).append("\n");
+                    double multa = rs.getDouble("multa");
+                    resultado.append("Taxa da Multa: ").append(String.format("%.0f%%", multa * 100)).append("\n");
+                    resultado.append("Equipamento ID: ").append(rs.getInt("equipamento_id")).append("\n");
+                    resultado.append("Cliente ID: ").append(rs.getInt("cliente_id")).append("\n");
+                    resultado.append("----------------------------\n"); // Separador entre registros
+                }
+
+                // Verifica se nenhum registro foi encontrado
+                if (!encontrouRegistros) {
+                    resultado.append("Nenhuma locação pendente encontrada para o CPF ou código informado.\n");
+                }
             }
-
-            // Verifica se nenhum registro foi encontrado
-            if (!encontrouRegistros) {
-                resultado.append("Nenhuma locação pendente encontrada para o CPF ou código informado.\n");
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resultado.append("Erro ao buscar locações: ").append(e.getMessage());
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        resultado.append("Erro ao buscar locações: ").append(e.getMessage());
-    }
 
-    // Define o texto no JTextArea
-    textArea.setText(resultado.toString());
-}
+        // Define o texto no JTextArea
+        textArea.setText(resultado.toString());
+    }
 
         
     public int extrairLocacaoIdDoTexto(String texto) {
@@ -322,30 +324,32 @@ public class Locacao {
             e.printStackTrace();
         }
     }
+    
     public void marcarLocacaoComoNaoPendente(int id) {
-    String sql = "UPDATE locacao SET status_pendente = 0 WHERE id = ?";
-    try (Connection conn = ConexaoMySQL.conectar();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setInt(1, id);
-        int linhasAfetadas = stmt.executeUpdate();
-        
-        if (linhasAfetadas == 0) {
-            System.out.println("Nenhuma locação encontrada com o ID: " + id);
-        } else {
-            System.out.println("Locacao ID " + id + " marcada como nao pendente.");
+        String sql = "UPDATE locacao SET status_pendente = 0 WHERE id = ?";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas == 0) {
+                System.out.println("Nenhuma locação encontrada com o ID: " + id);
+            } else {
+                System.out.println("Locacao ID " + id + " marcada como nao pendente.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
-}
+    
     public void atualizarMultaPaga(int locacaoId, double multa) throws SQLException {
-    String sql = "UPDATE locacao SET multa_paga = ? WHERE id = ?";
-    try (Connection conn = ConexaoMySQL.conectar();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setDouble(1, multa);
-        stmt.setInt(2, locacaoId);
-        stmt.executeUpdate();
+        String sql = "UPDATE locacao SET multa_paga = ? WHERE id = ?";
+        try (Connection conn = ConexaoMySQL.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, multa);
+            stmt.setInt(2, locacaoId);
+            stmt.executeUpdate();
+        }
     }
-}
 
 }

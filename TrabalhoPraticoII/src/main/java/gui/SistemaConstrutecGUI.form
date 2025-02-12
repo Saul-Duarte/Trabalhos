@@ -818,7 +818,7 @@
                               <Component id="btnEditarClientes" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                               <Component id="btnEditarLocacacoes" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -941,7 +941,7 @@
                                 <Column editable="true" title="Nome" type="java.lang.Object"/>
                                 <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
                                 <Column editable="true" title="Valor Di&#xe1;rio" type="java.lang.Object"/>
-                                <Column editable="true" title="Satatus" type="java.lang.Object"/>
+                                <Column editable="true" title="Status" type="java.lang.Object"/>
                                 <Column editable="true" title="Quantidade" type="java.lang.Object"/>
                               </Table>
                             </Property>
@@ -1297,7 +1297,7 @@
                                 <Column editable="true" title="Multa" type="java.lang.Object"/>
                                 <Column editable="true" title="Equipamento" type="java.lang.Object"/>
                                 <Column editable="true" title="Cliente" type="java.lang.Object"/>
-                                <Column editable="true" title="Status Pendente" type="java.lang.Object"/>
+                                <Column editable="true" title="Ativo" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

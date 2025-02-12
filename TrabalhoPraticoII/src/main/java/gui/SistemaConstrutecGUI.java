@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -610,7 +611,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Descrição", "Valor Diário", "Satatus", "Quantidade"
+                "ID", "Nome", "Descrição", "Valor Diário", "Status", "Quantidade"
             }
         ));
         jScrollPane4.setViewportView(tblEditarEquip);
@@ -823,7 +824,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Data de Inicio", "Data Termino", "Multa", "Equipamento", "Cliente", "Status Pendente"
+                "ID", "Data de Inicio", "Data Termino", "Multa", "Equipamento", "Cliente", "Ativo"
             }
         ));
         jScrollPane6.setViewportView(tblEditarLocacao);
@@ -938,7 +939,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
                         .addComponent(btnEditarClientes)
                         .addGap(90, 90, 90)
                         .addComponent(btnEditarLocacacoes)
-                        .addContainerGap(16, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelEditarDadosLayout.setVerticalGroup(
             panelEditarDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1257,6 +1258,25 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         Locacao locacao = new Locacao();
         int row = tblEditarLocacao.getSelectedRow();
         int id = (int) tblEditarLocacao.getValueAt(row, 0);
+        String sql = "SELECT status_pendente FROM locacao WHERE id = ?";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int status = rs.getInt("status_pendente");
+                if (status != 0) { // Se não for 0, significa que ainda não foi devolvida
+                    JOptionPane.showMessageDialog(this,
+                            "Esta locação ainda não foi devolvida.\n"
+                            + "Antes de excluí-la, finalize a devolução.",
+                            "Atenção", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao verificar status da locação.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         locacao.excluirLocacao(id);
         listarLocacoes();
     }//GEN-LAST:event_btnExcluirLocacaoActionPerformed
@@ -1295,6 +1315,22 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         int id = (int) tblEditarClientes.getValueAt(row, 0);
         cliente.excluirCliente(id);
         Locacao locacao = new Locacao();
+        String sql = "SELECT COUNT(*) FROM locacao WHERE cliente_id = ? AND status_pendente != 0";
+        try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Este cliente possui locações ativas.\n"
+                        + "Antes de excluí-lo, finalize todas as devoluções.",
+                        "Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao verificar locações do cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         locacao.excluirLocacaoPorCliente(id);
         listarClientes();
     }//GEN-LAST:event_btnExcluirClientesActionPerformed
@@ -1324,6 +1360,23 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
         int id = (int) tblEditarEquip.getValueAt(row, 0);
         Locacao locacao = new Locacao();
         if (locacao.equipamentoVinculado(id)) {
+            String sql = "SELECT COUNT(*) FROM locacao WHERE equipamento_id = ? AND status_pendente != 0";
+            try (Connection conn = ConexaoMySQL.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next() && rs.getInt(1) > 0) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Este equipamento possui locações ativas.\n"
+                            + "Antes de excluí-lo, todas as locações devem ser devolvidas.",
+                            "Atenção", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Erro ao verificar locações.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             locacao.excluirLocacoesPorEquipamento(id);
         }
         equip.excluirEquipamento(id);
@@ -1346,7 +1399,7 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText().trim(), formatter);
             LocalDate dataFim = LocalDate.parse(txtDataTermino.getText().trim(), formatter);
-            double multaPercentual = txtMulta.getText().isEmpty() ? 10 : Double.parseDouble(txtMulta.getText())/100;
+            double multaPercentual = txtMulta.getText().isEmpty() ? 0.10 : Double.parseDouble(txtMulta.getText())/100;
 
             // Validação de campos obrigatórios
             if (nomeCliente.isEmpty() || cpf.isEmpty() || telefone.isEmpty()) {
@@ -1389,8 +1442,13 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             String nome = (String) dropEquip.getSelectedItem().toString();
             int equipamentoId = equip.obterIdEquipamento(nome);
 
-            if (!equip.obterStatusEquipamento(equipamentoId)) {
+            if (equip.obterStatusEquipamento(equipamentoId) == false) {
                 JOptionPane.showMessageDialog(this, "O equipamento selecionado já está alugado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(equip.obterQuantidade(equipamentoId) == 0) {
+                JOptionPane.showMessageDialog(this, "O equipamento selecionado não está disponível!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -1406,7 +1464,12 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
             Locacao locacao = new Locacao();
             locacao.inserirLocacao(dataInicio, dataFim, multaPercentual, equipamentoId, clienteId);
 
-            JOptionPane.showMessageDialog(this, "Locação registrada com sucesso!");
+            // Calcula o valor estimado do aluguel
+            long diasAluguel = ChronoUnit.DAYS.between(dataInicio, dataFim);
+            double valorDiario = equip.obterValorDiario(equipamentoId); // Adicione um método para obter o valor diário do equipamento
+            double valorTotal = valorDiario * diasAluguel;
+
+            JOptionPane.showMessageDialog(this, "Locação registrada com sucesso! Valor estimado do aluguel: R$ " + String.format("%.2f", valorTotal));
 
             equip.atualizarStatusEquipamento(equipamentoId, false);
             equip.decrementarQuantidade(equipamentoId);
