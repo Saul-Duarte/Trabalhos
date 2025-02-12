@@ -1208,20 +1208,30 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cpfOuCodigo = txtBuscar.getText().trim();
 
-        if (cpfOuCodigo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, insira um CPF ou ID.", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            Long.valueOf(cpfOuCodigo); // Tenta converter a entrada para um número
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, insira apenas números.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+     if (cpfOuCodigo.isEmpty()) {
+         JOptionPane.showMessageDialog(this, "Por favor, insira um CPF ou ID.", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
+         return;
+     }
 
-        Locacao locacao = new Locacao();
+     // Verifica se a entrada contém apenas números (CPF ou código)
+     if (!cpfOuCodigo.matches("\\d+")) {
+         JOptionPane.showMessageDialog(this, "Por favor, insira apenas números.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
+         return;
+     }
 
-        locacao.buscarLocacaoPorCPF(cpfOuCodigo, txaBusca);
+     // Se for um código numérico pequeno, pode converter para Long
+     Long codigo = null;
+     if (cpfOuCodigo.length() < 10) { // Supondo que um código seja menor que 10 dígitos
+         try {
+             codigo = Long.valueOf(cpfOuCodigo);
+         } catch (NumberFormatException e) {
+             JOptionPane.showMessageDialog(this, "Erro ao processar o código.", "Erro", JOptionPane.ERROR_MESSAGE);
+             return;
+         }
+     }
+
+     Locacao locacao = new Locacao();
+     locacao.buscarLocacaoPorCPF(cpfOuCodigo, txaBusca); // CPF tratado como String
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtNomeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeEditActionPerformed

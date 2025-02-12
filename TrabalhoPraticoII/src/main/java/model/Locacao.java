@@ -197,45 +197,56 @@ public class Locacao {
         return multaTotal;
     }
     public void buscarLocacaoPorCPF(String cpfOuCodigo, JTextArea textArea) {
-        StringBuilder resultado = new StringBuilder(); // Para construir a string formatada
-        String sql = "SELECT l.id, l.data_inicio, l.data_termino, l.multa, l.equipamento_id, l.cliente_id " +
-                     "FROM locacao l " +
-                     "JOIN cliente c ON l.cliente_id = c.id " +
-                     "WHERE (c.cpf = ? OR l.id = ?) AND l.status_pendente = TRUE"; // Filtra apenas locações pendentes
+    StringBuilder resultado = new StringBuilder(); // Para construir a string formatada
+    String sql = "SELECT l.id, l.data_inicio, l.data_termino, l.multa, l.equipamento_id, l.cliente_id " +
+                 "FROM locacao l " +
+                 "JOIN cliente c ON l.cliente_id = c.id " +
+                 "WHERE (c.cpf = ? OR l.id = ?) AND l.status_pendente = TRUE"; // Filtra apenas locações pendentes
 
-        try (Connection conn = ConexaoMySQL.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try (Connection conn = ConexaoMySQL.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, cpfOuCodigo);
-            stmt.setInt(2, Integer.parseInt(cpfOuCodigo));
-            try (ResultSet rs = stmt.executeQuery()) {
-                boolean encontrouRegistros = false; // Flag para verificar se há registros
+        stmt.setString(1, cpfOuCodigo); // CPF deve ser String
 
-                while (rs.next()) {
-                    encontrouRegistros = true; // Marca que pelo menos um registro foi encontrado
-                    // Formata os dados e adiciona ao StringBuilder
-                    resultado.append("ID: ").append(rs.getInt("id")).append("\n");
-                    resultado.append("Data Início: ").append(rs.getDate("data_inicio")).append("\n");
-                    resultado.append("Data Término: ").append(rs.getDate("data_termino")).append("\n");
-                    double multa = rs.getDouble("multa");
-                    resultado.append("Taxa da Multa: ").append(String.format("%.0f%%", multa * 100)).append("\n");
-                    resultado.append("Equipamento ID: ").append(rs.getInt("equipamento_id")).append("\n");
-                    resultado.append("Cliente ID: ").append(rs.getInt("cliente_id")).append("\n");
-                    resultado.append("----------------------------\n"); // Separador entre registros
-                }
-
-                // Verifica se nenhum registro foi encontrado
-                if (!encontrouRegistros) {
-                    resultado.append("Nenhuma locação pendente encontrada para o CPF ou código informado.\n");
-                }
+        // Verifica se é um ID numérico antes de converter
+        if (cpfOuCodigo.matches("\\d+")) { // Se for apenas números
+            try {
+                stmt.setLong(2, Long.parseLong(cpfOuCodigo)); // Usa Long para evitar erro com números grandes
+            } catch (NumberFormatException e) {
+                stmt.setNull(2, java.sql.Types.BIGINT); // Se for um CPF muito grande, ignora como número
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            resultado.append("Erro ao buscar locações: ").append(e.getMessage());
+        } else {
+            stmt.setNull(2, java.sql.Types.BIGINT); // Se não for um número, evita erro
         }
 
-        // Define o texto no JTextArea
-        textArea.setText(resultado.toString());
+        try (ResultSet rs = stmt.executeQuery()) {
+            boolean encontrouRegistros = false; // Flag para verificar se há registros
+
+            while (rs.next()) {
+                encontrouRegistros = true; // Marca que pelo menos um registro foi encontrado
+                // Formata os dados e adiciona ao StringBuilder
+                resultado.append("ID: ").append(rs.getInt("id")).append("\n");
+                resultado.append("Data Início: ").append(rs.getDate("data_inicio")).append("\n");
+                resultado.append("Data Término: ").append(rs.getDate("data_termino")).append("\n");
+                double multa = rs.getDouble("multa");
+                resultado.append("Taxa da Multa: ").append(String.format("%.0f%%", multa * 100)).append("\n");
+                resultado.append("Equipamento ID: ").append(rs.getInt("equipamento_id")).append("\n");
+                resultado.append("Cliente ID: ").append(rs.getInt("cliente_id")).append("\n");
+                resultado.append("----------------------------\n"); // Separador entre registros
+            }
+
+            // Verifica se nenhum registro foi encontrado
+            if (!encontrouRegistros) {
+                resultado.append("Nenhuma locação pendente encontrada para o CPF ou código informado.\n");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        resultado.append("Erro ao buscar locações: ").append(e.getMessage());
+    }
+
+    // Define o texto no JTextArea
+    textArea.setText(resultado.toString());
     }
 
         
