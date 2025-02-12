@@ -1282,16 +1282,38 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirLocacaoActionPerformed
 
     private void btnAlterarLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarLocacaoActionPerformed
-        Locacao locacao = new Locacao();
-        int row = tblEditarLocacao.getSelectedRow();
-        int id = (int) tblEditarLocacao.getValueAt(row, 0);
         try {
-            locacao.atualizarLocacao(id, new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(txtDataTerminoEdit.getText()).getTime()));
-        } catch (ParseException ex) {
-            Logger.getLogger(SistemaConstrutecGUI.class.getName()).log(Level.SEVERE, null, ex);
+            int row = tblEditarLocacao.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione uma locação para alterar!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String dataTerminoStr = txtDataTerminoEdit.getText().trim();
+            if (dataTerminoStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "O campo Data de Término não pode estar vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            java.sql.Date dataTermino;
+            try {
+                dataTermino = new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dataTerminoStr).getTime());
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Formato de data inválido! Use o formato dd/MM/yyyy.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int id = (int) tblEditarLocacao.getValueAt(row, 0);
+            Locacao locacao = new Locacao();
+            locacao.atualizarLocacao(id, dataTermino);
+
+            txtDataTerminoEdit.setText("");
+            listarLocacoes();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar locação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
-        txtDataTerminoEdit.setText("");
-        listarLocacoes();
     }//GEN-LAST:event_btnAlterarLocacaoActionPerformed
 
     private void btnCancelarEditLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditLocacaoActionPerformed
@@ -1299,17 +1321,47 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarEditLocacaoActionPerformed
 
     private void btnAlterarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClientesActionPerformed
-        Cliente cliente = new Cliente();
-        int row = tblEditarClientes.getSelectedRow();
-        int id = (int) tblEditarClientes.getValueAt(row, 0);
-        cliente.atualizarCliente(id, txtNomeEditClientes.getText(), txtCPFEdit.getText(), txtTelefoneEdit.getText());
-        limparCamposClientesEdit();
-        Locacao locacao = new Locacao();
-        locacao.alterarLocacaoPorCliente(id);
-        listarClientes();
+       try {
+            int row = tblEditarClientes.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione um cliente para alterar!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String nomeCliente = txtNomeEditClientes.getText().trim();
+            String cpf = txtCPFEdit.getText().trim();
+            String telefone = txtTelefoneEdit.getText().trim();
+
+            if (!nomeCliente.matches("[A-Za-zÀ-ÖØ-öø-ÿ ]+")) {
+                JOptionPane.showMessageDialog(this, "Nome inválido! Digite apenas letras.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!cpf.matches("\\d{11}")) {
+                JOptionPane.showMessageDialog(this, "CPF inválido! Deve conter exatamente 11 números.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!telefone.matches("\\d{10,11}")) {
+                JOptionPane.showMessageDialog(this, "Telefone inválido! Deve conter apenas números (DDD + número).", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int id = (int) tblEditarClientes.getValueAt(row, 0);
+            Cliente cliente = new Cliente();
+            cliente.atualizarCliente(id, nomeCliente, cpf, telefone);
+
+            limparCamposClientesEdit();
+            listarClientes();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar cliente: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnAlterarClientesActionPerformed
 
     private void btnExcluirClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClientesActionPerformed
+
         Cliente cliente = new Cliente();
         int row = tblEditarClientes.getSelectedRow();
         int id = (int) tblEditarClientes.getValueAt(row, 0);
@@ -1340,18 +1392,57 @@ public class SistemaConstrutecGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarEditClientesActionPerformed
 
     private void btnAlterarEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEquipActionPerformed
-        Equipamento equip = new Equipamento();
-        double preco = (txtPrecoEdit.getText().isEmpty()) ? 0.0 : Double.parseDouble(txtPrecoEdit.getText());
-        int quantidade = (txtQuantEdit.getText().isEmpty()) ? 0 : Integer.parseInt(txtQuantEdit.getText());
-        int row = tblEditarEquip.getSelectedRow();
-        int id = (int) tblEditarEquip.getValueAt(row, 0);
-        equip.atualizarEquipamento(id, txtNomeEdit.getText(), txtDescricaoEdit.getText(), preco, quantidade);
-        Locacao locacao = new Locacao();
-        if (locacao.equipamentoVinculado(id)) {
-            locacao.alterarLocacoesPorEquipamento(id);
+        try {
+            int row = tblEditarEquip.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione um equipamento para alterar!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String nome = txtNomeEdit.getText().trim();
+            String descricao = txtDescricaoEdit.getText().trim();
+            String precoStr = txtPrecoEdit.getText().trim();
+            String quantidadeStr = txtQuantEdit.getText().trim();
+
+            if (nome.isEmpty() || descricao.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nome e descrição não podem estar vazios!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double preco;
+            try {
+                preco = Double.parseDouble(precoStr);
+                if (preco < 0) throw new NumberFormatException();
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Preço inválido! Digite um valor numérico positivo.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int quantidade;
+            try {
+                quantidade = Integer.parseInt(quantidadeStr);
+                if (quantidade < 0) throw new NumberFormatException();
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Quantidade inválida! Digite um número inteiro positivo.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int id = (int) tblEditarEquip.getValueAt(row, 0);
+            Equipamento equip = new Equipamento();
+            equip.atualizarEquipamento(id, nome, descricao, preco, quantidade);
+
+            Locacao locacao = new Locacao();
+            if (locacao.equipamentoVinculado(id)) {
+                locacao.alterarLocacoesPorEquipamento(id);
+            }
+
+            limparCamposEquipamentosEdit();
+            listarEquipamentos();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar equipamento: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
-        limparCamposEquipamentosEdit();
-        listarEquipamentos();
     }//GEN-LAST:event_btnAlterarEquipActionPerformed
 
     private void btnExcluirEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirEquipActionPerformed
