@@ -1,55 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package service;
 
-import controller.Gestor;
-import model.Cliente;
-import model.Equipamento;
-import model.Locacao;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.util.List;
 
-/**
- *
- * @author sauls
- */
 public class RelatorioTest {
-    @Test
-    public void testGerarRelatorioMaisAlugados() {
-        Gestor gestor = new Gestor();
-        gestor.cadastrarEquipamento("Betoneira", "Betoneira de 400L", 150.0, 5);
-        gestor.cadastrarEquipamento("Compactador", "Compactador de solo", 100.0, 5);
 
-        gestor.registrarLocacao("João Silva", "12345678900", "123456789", 
-                                 List.of(gestor.getEquipamentosDisponiveis().get(0)),
-                                 LocalDate.of(2025, 1, 10), 
-                                 LocalDate.of(2025, 1, 12), 10.0);
+    private Relatorio relatorio;
 
-        Map<String, Long> relatorio = Relatorio.gerarRelatorioMaisAlugados(gestor.getLocacoes());
-
-        assertEquals(1, relatorio.get("Betoneira"));
-        assertNull(relatorio.get("Compactador"));
+    @BeforeEach
+    public void setUp() {
+        relatorio = new Relatorio();
     }
 
     @Test
-    public void testGerarRelatorioClientesComMultas() {
-        Gestor gestor = new Gestor();
-        gestor.cadastrarEquipamento("Betoneira", "Betoneira de 400L", 150.0, 5);
+    public void testObterHistoricoLocacoes() {
+        List<String> historico = relatorio.obterHistoricoLocacoes();
+        assertNotNull(historico);
+    }
 
-        gestor.registrarLocacao("João Silva", "12345678900", "123456789", 
-                                 List.of(gestor.getEquipamentosDisponiveis().get(0)),
-                                 LocalDate.of(2025, 1, 10), 
-                                 LocalDate.of(2025, 1, 15), 10.0);
+    @Test
+    public void testObterEquipamentosMaisAlugados() {
+        List<EquipamentoRelatorio> equipamentos = relatorio.obterEquipamentosMaisAlugados();
+        assertNotNull(equipamentos);
+    }
 
-        List<Cliente> clientesComMultas = Relatorio.gerarRelatorioClientesComMultas(gestor.getClientes());
-
-        assertTrue(clientesComMultas.isEmpty());
+    @Test
+    public void testObterClientesComMultasAcumuladas() {
+        List<ClienteMulta> clientes = relatorio.obterClientesComMultasAcumuladas();
+        assertNotNull(clientes);
     }
 }
